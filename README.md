@@ -10,3 +10,5 @@ npm i
 # run solution for given day
 npm run day 1
 ```
+
+Programming language https://github.com/AT-290690/fez

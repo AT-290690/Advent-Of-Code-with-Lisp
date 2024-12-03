@@ -59,8 +59,7 @@
                         (math:product))))
         (math:summation))))
 
-'(
-(part1 (parse sample))
+'((part1 (parse sample))
 ; (part1 (parse sample2))
 ; (part1 (parse sample3))
 (part1 (parse sample4)))
