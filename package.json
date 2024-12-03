@@ -1,0 +1,15 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "Advent Of Code 2024 solutions",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "day": "node index.js"
+  },
+  "author": "Anthony Tonev & others",
+  "license": "MIT",
+  "dependencies": {
+    "fez-lisp": "^1.2.19"
+  }
+}

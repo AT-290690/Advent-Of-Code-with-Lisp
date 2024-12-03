@@ -40,4 +40,4 @@
     (math:summation)))))
 
 (let PARSED (parse INPUT))
-(array (part1 PARSED) (part2 PARSED) (part2-better PARSED))
+(array (part1 PARSED) (part2 PARSED))
