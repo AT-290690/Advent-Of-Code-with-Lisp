@@ -24,7 +24,7 @@
 (let part1 (lambda input (|> 
                           input
                           (array:unzip)
-                          (array:map (curry:binary array:sort >))
+                          (array:map (curry:two array:sort >))
                           (tuple:zip)
                           (array:map tuple:subtract)
                           (array:map math:abs)
