@@ -6,7 +6,7 @@
 (let match? (lambda source pattern index (do 
     (let size (length pattern))
     (and (array:in-bounds? source (- index size)) (array:enumerated-every? pattern (lambda x i  (= (get source (+ (- index size) i)) x)))))))
-(let integer? (lambda digit (and (>= digit char:0) (<= digit char:9))))
+(let digit? (lambda digit (and (>= digit char:0) (<= digit char:9))))
 (let parse (lambda source (do 
     (let tree ())
     (let head (var:def tree))
@@ -41,7 +41,7 @@
                 (bool:false! inside-parens?)) 
                 (bool:true! valid-separator?)))
             (*) (do 
-                (if (integer? cursor) (do
+                (if (digit? cursor) (do
                     (array:append! acc cursor)
                     (if (> (length acc) 3) (array:empty! acc))
                     (bool:false! valid-separator?)) (do 
