@@ -13,7 +13,9 @@ access(path, (err) => {
     if (Array.isArray(solution))
       console.log(
         solution
-          .map((x, i) => `\x1b[34mPart ${i + 1}: \x1b[33m${x}\x1b[0m\n`)
+          .map(
+            (x, i) => `\x1b[33m${i === 0 ? " *" : "**"} \x1b[32m${x}\x1b[0m\n`
+          )
           .join("\n")
       );
   }
