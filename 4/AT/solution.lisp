@@ -1,14 +1,16 @@
-(let sample (array:concat-with '(
-"MMMSXXMASM"
-"MSAMXMSMSA"
-"AMXSXMAAMM"
-"MSAMASMSMX"
-"XMASAMXAMM"
-"XXAMMXXAMA"
-"SMSMSASXSS"
-"SAXAMASAAA"
-"MAMMMXMMMM"
-"MXMXAXMASX") char:new-line))
+(let sample 
+  (array:concat-with '(
+      "MMMSXXMASM"
+      "MSAMXMSMSA"
+      "AMXSXMAAMM"
+      "MSAMASMSMX"
+      "XMASAMXAMM"
+      "XXAMMXXAMA"
+      "SMSMSASXSS"
+      "SAXAMASAAA"
+      "MAMMMXMMMM"
+      "MXMXAXMASX") 
+      char:new-line))
 
 (let parse (lambda input (|> input (string:lines))))
 (let part1 (lambda matrix (do 
@@ -33,7 +35,13 @@
 (let part2 (lambda matrix (do 
     (let coords ())
     (matrix:enumerated-for matrix (lambda char y x (if (= char char:A) (array:push! coords (array y x)))))
-    (array:fold (array:select coords (lambda dir (and (matrix:in-bounds? matrix (+ (array:first dir) -1) (+ (array:second dir) -1)) (matrix:in-bounds? matrix (+ (array:first dir) 1) (+ (array:second dir) 1))))) (lambda a coord (do 
+    (|>
+      coords
+      (array:select  (lambda dir
+                        (and 
+                          (matrix:in-bounds? matrix (+ (array:first dir) -1) (+ (array:second dir) -1)) 
+                          (matrix:in-bounds? matrix (+ (array:first dir) 1) (+ (array:second dir) 1)))))
+      (array:fold (lambda a coord (do
         (let y (array:first coord))
         (let x (array:second coord))
         (let A (matrix:get matrix (+ y -1) (+ x -1)))
@@ -44,6 +52,6 @@
             (and (= A char:M) (= B char:S) (= C char:M) (= D char:S))
             (and (= A char:S) (= B char:M) (= C char:S) (= D char:M))
             (and (= A char:M) (= B char:M) (= C char:S) (= D char:S))
-            (and (= A char:S) (= B char:S) (= C char:M) (= D char:M)))))) 0))))
+            (and (= A char:S) (= B char:S) (= C char:M) (= D char:M)))))) 0)))))
 (let PARSED (parse sample))
 '((part1 PARSED) (part2 PARSED))
