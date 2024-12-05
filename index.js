@@ -1,7 +1,7 @@
 import { fez } from "fez-lisp";
 import { readFileSync, access } from "fs";
 const day = process.argv[2];
-const path = `./${day}/AT/solution.lisp`;
+const path = `./${day}/solution.lisp`;
 access(path, (err) => {
   if (err) {
     console.log(`\x1b[31mSolution for day ${day} does not exist\x1b[33m\n`);
