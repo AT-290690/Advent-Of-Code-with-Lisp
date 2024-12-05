@@ -17,7 +17,7 @@
     (let MUL "mul")
     (let DO "do(")
     (let NOT-DO "don't(")
-    (array:for-enumerated source (lambda cursor i (do 
+    (array:enumerated-for source (lambda cursor i (do 
         (let mul? (and (bool:false? disabled?) (match? source MUL i)))
         (cond 
             (and mul? (= cursor char:left-brace)) (do 
