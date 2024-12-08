@@ -36,9 +36,8 @@
                      (- out (list:head args)))))))))
                 
 (let part2 (lambda args out (do 
-          (if 
-            (list:nil? (list:tail args)) (= out (list:head args))
-            (or
+          (if (list:nil? (list:tail args)) (= out (list:head args))
+              (or
                 (and (= (mod out (list:head args)) 0) 
                      (part2 (list:tail args) (/ out (list:head args))))
                 (and (> out (list:head args)) 
