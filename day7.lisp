@@ -43,8 +43,7 @@
               (or
                 (and (= (mod out (list:head args)) 0)
                      (part1 (list:tail args) (/ out (list:head args))))
-                (and (> out (list:head args)) (part1 (list:tail args)
-                     (- out (list:head args)))))))))
+                (and (> out (list:head args)) (part1 (list:tail args) (- out (list:head args)))))))))
                 
 (let part2 (lambda args out (do 
           (if (list:nil? (list:tail args)) (= out (list:head args))
