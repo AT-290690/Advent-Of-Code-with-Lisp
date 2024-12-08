@@ -19,10 +19,9 @@
 (let part1 (lambda input (do 
     (let solve (lambda args out (do 
         (if (list:nil? (list:tail args)) (= out (list:head args))
-            (cond
-                (and (= (mod out (list:head args)) 0) (solve (list:tail args) (/ out (list:head args)))) 1
-                (and (> out (list:head args)) (solve (list:tail args) (- out (list:head args)))) 1
-                (*) 0)))))
+            (or
+                (and (= (mod out (list:head args)) 0) (solve (list:tail args) (/ out (list:head args))))
+                (and (> out (list:head args)) (solve (list:tail args) (- out (list:head args)))))))))
     (|> input 
         (array:map (lambda x (do 
             (let left (array:first x))
