@@ -11,21 +11,32 @@
 ) char:new-line))
 
 (let parse (lambda input (do 
-    (let lines (|> input (string:lines) (array:map (lambda x (do 
+    (let lines (|> input 
+                   (string:lines) 
+                   (from:array->list) 
+                   (list:map (lambda x (do
     (let sides (|> x (string:split (array:first ":"))))
-    (let L (|> sides (array:first) (from:chars->digits) (from:digits->number)))
-    (let R (|> sides (array:second) (string:words) (array:exclude array:empty?) (from:array->list) (list:map (lambda x (|> x (from:chars->digits) (from:digits->number))))))
-    '(L R)))))))))
+    (let L (|> sides 
+               (array:first)
+               (from:chars->digits)
+               (from:digits->number)))
+    (let R (|> sides 
+              (array:second)
+              (string:words)
+              (array:exclude array:empty?)
+              (from:array->list)
+              (list:map (lambda x (|> x (from:chars->digits) (from:digits->number))))))
+    `(L R)))))))))
 
     
 (let sum (lambda input solution (|> input
-            (array:map (lambda x (do
-            (let left (array:first x))
-            (let right (list:reverse (array:second x)))
-            '(left (solution right left)))))
-            (array:select (lambda x (= (array:second x) 1)))
-            (array:map array:first)
-            (math:summation))))
+            (list:map (lambda x (do
+            (let left (list:head x))
+            (let right (list:reverse (list:head (list:tail x))))
+            `(left (solution right left)))))
+            (list:filter (lambda x (= (list:head (list:tail x)) 1)))
+            (list:map list:head)
+            (math:list-summation))))
 
  (let part1 (lambda args out (do
           (if (list:nil? (list:tail args)) (= out (list:head args))
