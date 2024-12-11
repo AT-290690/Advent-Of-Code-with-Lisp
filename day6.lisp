@@ -1,4 +1,4 @@
-(let INPUT (array:concat-with '(
+(let INPUT (string:concat-with-lines '(
   "....#....."
   ".........#"
   ".........."
@@ -9,7 +9,7 @@
   "........#."
   "#........."
   "......#..."
-) char:new-line))
+)))
 (let parse (lambda input (|> input (string:lines))))
 (let dir '('(-1 0) '(0 1) '(1 0) '(0 -1)))
 

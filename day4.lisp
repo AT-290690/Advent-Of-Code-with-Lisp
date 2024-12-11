@@ -1,5 +1,5 @@
 (let sample 
-  (array:concat-with '(
+  (string:concat-with-lines '(
       "MMMSXXMASM"
       "MSAMXMSMSA"
       "AMXSXMAAMM"
@@ -9,13 +9,11 @@
       "SMSMSASXSS"
       "SAXAMASAAA"
       "MAMMMXMMMM"
-      "MXMXAXMASX") 
-      char:new-line))
+      "MXMXAXMASX")))
 
 (let parse (lambda input (|> input (string:lines))))
 (let part1 (lambda matrix (do 
-    (let coords ())
-    (matrix:enumerated-for matrix (lambda char y x (if (= char char:X) (array:push! coords (array y x)))))
+    (let coords (matrix:points matrix (lambda char (= char char:X))))
     (let pattern "XMAS")
     (let size (length pattern))
     (let out (var:def 0))
@@ -33,8 +31,7 @@
     (var:get out))))
 
 (let part2 (lambda matrix (do 
-    (let coords ())
-    (matrix:enumerated-for matrix (lambda char y x (if (= char char:A) (array:push! coords (array y x)))))
+    (let coords (matrix:points matrix (lambda char (= char char:A))))
     (|>
       coords
       (array:select  (lambda dir

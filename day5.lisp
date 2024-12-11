@@ -1,4 +1,4 @@
-(let INPUT (array:concat-with '( 
+(let INPUT (string:concat-with-lines '( 
   "47|53"
   "97|13"
   "97|61"
@@ -26,7 +26,7 @@
   "75,29,13"
   "75,97,47,61,53"
   "61,13,29"
-  "97,13,75,29,47") char:new-line))
+  "97,13,75,29,47")))
 
 (let parse (lambda input (do 
     (let lines (|> input (string:lines)))
