@@ -3,7 +3,7 @@
 (let part1 (lambda input (do 
     (let arrangement (array:enumerated-fold input (lambda a x i (do 
         (let digit (from:char->digit x))
-        (array:for-range 0 digit (lambda . (array:push! a (if (math:even? i) (from:digit->char (mod (/ i 2) 10)) char:dot))) )
+        (loop:for-n digit (lambda . (array:push! a (if (math:even? i) (from:digit->char (mod (/ i 2) 10)) char:dot))) )
         a
     )) ()))
    (let dots-count (array:count arrangement char:dot))
