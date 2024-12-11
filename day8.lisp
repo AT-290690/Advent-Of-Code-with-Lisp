@@ -18,7 +18,7 @@
 (let part1 (lambda matrix (do 
     (let coords ())
     (let copy (matrix:shallow-copy matrix))
-    (let update (lambda y1 y2 x1 x2 (do
+    (let update! (lambda y1 y2 x1 x2 (do
 
         (let distanceY (math:abs (- y1 y2)))
         (let distanceX (math:abs (- x1 x2)))
@@ -34,9 +34,9 @@
     (matrix:enumerated-for matrix (lambda char y x (if (not (= char char:dot)) (array:push! coords (array char y x)))))
     
      (let map (array:fold coords (lambda a b 
-        (if (map:has? a '((array:first b))) 
-            (map:set! a '((array:first b)) (array:merge (map:get a '((array:first b))) '((array:tail b)))) 
-            (map:set! a '((array:first b)) '((array:tail b))))) (new:set8)))
+        (if (map:has? a (array (array:first b))) 
+            (map:set! a (array (array:first b)) (array:merge (map:get a (array (array:first b))) (array (array:tail b)))) 
+            (map:set! a (array (array:first b)) (array (array:tail b))))) (new:set8)))
      (let pairs (|> map (array:flat-one) (array:map array:second) (array:exclude (lambda x (= (length x) 1)))))
      (array:enumerated-for pairs (lambda pair i (do
                 (array:for-range 0 (length pair) (lambda i 
@@ -46,13 +46,13 @@
                          (let y2 (array:first (get pair j)))
                          (let x1 (array:second (get pair i)))
                          (let x2 (array:second (get pair j)))
-                         (update y1 y2 x1 x2))))))))))
+                         (update! y1 y2 x1 x2))))))))))
     (|> copy (array:flat-one) (array:count char:hash)))))
 
 (let part2 (lambda matrix (do 
     (let coords ())
     (let copy (matrix:shallow-copy matrix))
-    (let update (lambda y1 y2 x1 x2 (do
+    (let update! (lambda y1 y2 x1 x2 (do
 
         (let distanceY (math:abs (- y1 y2)))
         (let distanceX (math:abs (- x1 x2)))
@@ -74,9 +74,9 @@
     (matrix:enumerated-for matrix (lambda char y x (if (not (= char char:dot)) (array:push! coords (array char y x)))))
     
      (let map (array:fold coords (lambda a b 
-        (if (map:has? a '((array:first b))) 
-            (map:set! a '((array:first b)) (array:merge (map:get a '((array:first b))) '((array:tail b)))) 
-            (map:set! a '((array:first b)) '((array:tail b))))) (new:set8)))
+        (if (map:has? a (array (array:first b))) 
+            (map:set! a (array (array:first b)) (array:merge (map:get a (array (array:first b))) (array (array:tail b)))) 
+            (map:set! a (array (array:first b)) (array (array:tail b))))) (new:set8)))
      (let pairs (|> map (array:flat-one) (array:map array:second) (array:exclude (lambda x (= (length x) 1)))))
      (array:enumerated-for pairs (lambda pair i (do
                 (array:for-range 0 (length pair) (lambda i 
@@ -86,7 +86,7 @@
                          (let y2 (array:first (get pair j)))
                          (let x1 (array:second (get pair i)))
                          (let x2 (array:second (get pair j)))
-                         (update y1 y2 x1 x2))))))))))
+                         (update! y1 y2 x1 x2))))))))))
     (|> copy (array:flat-one) (array:exclude (lambda x (= x char:dot))) (length)))))
 
 '((part1 (parse INPUT)) (part2 (parse INPUT)))
