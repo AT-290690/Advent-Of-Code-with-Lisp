@@ -39,7 +39,7 @@
             (map:set! a (array (array:first b)) (array (array:tail b))))) (new:set8)))
      (let pairs (|> map (array:flat-one) (array:map array:second) (array:exclude (lambda x (= (length x) 1)))))
      (array:enumerated-for pairs (lambda pair i (do
-                (loop:for-n (length pair) (lambda i 
+                (loop:for-range 0 (length pair) (lambda i 
                     (loop:for-range i (length pair) (lambda j 
                         (if (<> i j) (do
                          (let y1 (array:first (get pair i)))
@@ -78,7 +78,7 @@
             (map:set! a (array (array:first b)) (array (array:tail b))))) (new:set8)))
      (let pairs (|> map (array:flat-one) (array:map array:second) (array:exclude (lambda x (= (length x) 1)))))
      (array:enumerated-for pairs (lambda pair i (do
-                (loop:for-n (length pair) (lambda i 
+                (loop:for-range 0 (length pair) (lambda i 
                     (loop:for-range i (length pair) (lambda j 
                         (if (<> i j) (do
                          (let y1 (array:first (get pair i)))
