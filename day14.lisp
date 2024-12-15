@@ -18,6 +18,7 @@
         (string:lines)
         (array:map (lambda x 
             (|> x (string:words) (array:map (lambda x (|> x (array:drop 2)  (string:commas) (array:map (lambda x (|> x (from:chars->positive-or-negative-digits)(from:positive-or-negative-digits->number)))))))))))))
+
 (let part1 (lambda input (do 
     (let WIDTH 11)
     (let HEIGHT 7)
@@ -72,4 +73,5 @@
         (math:product)))))
 
 (let PARSED (parse INPUT))
+
 '((part1 PARSED))

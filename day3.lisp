@@ -3,10 +3,13 @@
 (let sample3 "mul(1, 2)")
 (let sample4 "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))")
 (let test "mul(1,2)")
+
 (let match? (lambda source pattern index (do 
     (let size (length pattern))
     (and (array:in-bounds? source (- index size)) (array:enumerated-every? pattern (lambda x i  (= (get source (+ (- index size) i)) x)))))))
+
 (let digit? (lambda digit (and (>= digit char:0) (<= digit char:9))))
+
 (let parse (lambda source (do 
     (let tree ())
     (let head (var:def tree))
@@ -50,6 +53,7 @@
                         (array:empty! (var:get head))))
                     (if (bool:false? valid-separator?) (bool:false! inside-parens?)))))))))
     tree)))
+
 (let part1 (lambda inp (|> 
         inp 
         (array:exclude array:empty?) 

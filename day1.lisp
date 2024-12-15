@@ -6,6 +6,7 @@
     "3   9"
     "3   3"
 )))
+
 (let parse (lambda input (|> 
                             input 
                             (string:lines) 
@@ -37,4 +38,5 @@
     (math:summation)))))
 
 (let PARSED (parse INPUT))
+
 '((part1 PARSED) (part2 PARSED))

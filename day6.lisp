@@ -10,7 +10,9 @@
   "#........."
   "......#..."
 )))
+
 (let parse (lambda input (|> input (string:lines))))
+
 (let dir '('(-1 0) '(0 1) '(1 0) '(0 -1)))
 
 (let part1 (lambda input (do
@@ -75,4 +77,5 @@
   (var:get loops))))
   
 (let PARSED (parse INPUT))
+
 '((part1 PARSED) (part2 PARSED))

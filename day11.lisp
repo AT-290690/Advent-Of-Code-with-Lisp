@@ -1,4 +1,5 @@
 (let INPUT "125 17")
+
 (let parse (lambda input (|> input (string:words) (array:map (lambda x (|> x (from:chars->digits) (from:digits->number)))))))
 
 ; If the stone is engraved with the number 0, it is replaced by a stone engraved with the number 1.
@@ -37,4 +38,5 @@
     (|> input (array:map (lambda x (count x TIMES))) (math:summation)))))
 
 (let PARSED (parse INPUT))
+
 '((part1 PARSED) (part2 PARSED))

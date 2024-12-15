@@ -6,6 +6,7 @@
 "8 6 4 4 1"
 "1 3 6 7 9"
 )))
+
 (let parse (lambda input (|> input (string:lines) (array:map (lambda l (|> l (string:words) (array:map (lambda w (|> w (from:chars->digits) (from:digits->number))))))))))
 
 (let part1 (lambda input (|> input (array:select (lambda line (do 
@@ -21,4 +22,5 @@
                             (array:count-of (lambda x (math:positive? (part1 x)))))))
 
 (let PARSED (parse iINPUT))
+
 '((part1 PARSED) (part2 PARSED))

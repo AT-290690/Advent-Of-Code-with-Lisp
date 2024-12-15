@@ -1,16 +1,27 @@
 (let INPUT "2333133121414131402")
 
-(let part1 (lambda input (do 
-    (let arrangement (array:enumerated-fold input (lambda a x i (do 
-        (let digit (from:char->digit x))
-        (loop:for-n digit (lambda . (array:push! a (if (math:even? i) (from:digit->char (mod (/ i 2) 10)) char:dot))))
-        a)) ()))
-   (let dots-count (array:count arrangement char:dot))
-   (let first->last (|> arrangement (array:enumerated-map (lambda x i (if (<> x char:dot) i -1))) (array:exclude math:negative?)))
-   (let last->first (array:reverse first->last))
-   (let out (array:fold arrangement (lambda a b (do 
-        (if (= b char:dot) (array:push! a (get arrangement (array:pop! first->last))) (array:push! a (get arrangement (array:pop! last->first))))
-        a)) ()))
-    (array:enumerated-fold (array:slice out 0 (- (length out) dots-count)) (lambda a b i (+ a (* i (from:char->digit b)))) 0))))
+(let parse (lambda input (from:chars->digits input)))
 
-'((part1 INPUT))
+(let part1 (lambda input (do
+    (let file-id (var:def -1))
+    (let disk (|> input
+        (array:enumerated-fold (lambda disk ch i 
+        (array:merge! disk
+            (if (math:even? i) (do
+                    (let id (var:get (var:increment! file-id)))
+                    (array:of ch (lambda . id)))
+                    (array:of ch (lambda . -1))))) ())))
+    (let blanks ())
+    (array:enumerated-for disk (lambda x i (if (= x -1) (array:push! blanks i))))
+    (let rec:fragment (lambda ind (do
+        (let i (get blanks ind))
+        (if (= (array:last disk) -1) (do (array:pop! disk) (rec:fragment ind))
+            (unless (<= (length disk) i) (do 
+            (set! disk i (array:pop! disk))
+            (rec:fragment (+ ind 1))))))))
+        (rec:fragment 0)
+        (|> disk (array:enumerated-fold (lambda a b i (+ a (* b i))) 0)))))
+       
+(let PARSED (parse INPUT))
+
+'((part1 PARSED))

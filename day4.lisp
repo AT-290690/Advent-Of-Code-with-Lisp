@@ -12,6 +12,7 @@
       "MXMXAXMASX")))
 
 (let parse (lambda input (|> input (string:lines))))
+
 (let part1 (lambda matrix (do 
     (let coords (matrix:points matrix (lambda char (= char char:X))))
     (let pattern "XMAS")
@@ -50,5 +51,7 @@
             (and (= A char:S) (= B char:M) (= C char:S) (= D char:M))
             (and (= A char:M) (= B char:M) (= C char:S) (= D char:S))
             (and (= A char:S) (= B char:S) (= C char:M) (= D char:M)))))) 0)))))
+
 (let PARSED (parse sample))
+
 '((part1 PARSED) (part2 PARSED))
