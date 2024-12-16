@@ -62,7 +62,7 @@
           (rec:step matrix start (+ angle 1) (map:set! corners key (+ c 1)))))
           (or (= current char:dot) (= current char:X)) (rec:step matrix start-copy angle corners)))))))
   (rec:step matrix starting 0 (new:set64))
-  (let path '())
+  (let path ())
   (let Y (get starting 0))
   (let X (get starting 1))
   (matrix:enumerated-for matrix (lambda current y x (if 
