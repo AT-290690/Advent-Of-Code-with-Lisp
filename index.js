@@ -9,6 +9,8 @@ access(path, (err) => {
     const file = readFileSync(path, "utf-8");
     const solution = fez(file, {
       mutation: 1,
+      compile: 1,
+      eval: 1,
     });
     if (Array.isArray(solution))
       console.log(
