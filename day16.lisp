@@ -20,7 +20,7 @@
 
 (let part1 (lambda matrix (do 
 
-    (let from:stats->key (lambda item (|> item (array:map (lambda x (|> x (from:number->positive-or-negative-digits) (from:positive-or-negative-digits->chars)))) (array:commas))))
+    (let from:stats->key (lambda item (|> item (from:numbers->strings) (array:commas))))
 
     (let start (array:first (matrix:points matrix (lambda cell (= cell char:S)))))
     (let end (array:first (matrix:points matrix (lambda cell (= cell char:E)))))

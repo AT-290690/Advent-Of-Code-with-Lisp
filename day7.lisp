@@ -25,7 +25,7 @@
               (string:words)
               (array:exclude array:empty?)
               (from:array->list)
-              (list:map (lambda x (|> x (from:chars->digits) (from:digits->number))))))
+              (list:map from:string->number)))
     `(L R)))))))))
 
     

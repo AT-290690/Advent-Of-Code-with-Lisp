@@ -14,10 +14,7 @@
                                                       word 
                                                       (string:words) 
                                                       (array:select array:not-empty?) 
-                                                      (array:map (lambda n (|> 
-                                                                             n 
-                                                                             (from:chars->digits) 
-                                                                             (from:digits->number))))))))))
+                                                      (from:strings->numbers)))))))
 
 (let part1 (lambda input (|> 
                           input
