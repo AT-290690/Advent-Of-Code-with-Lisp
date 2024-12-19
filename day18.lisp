@@ -43,7 +43,7 @@
 
     (let goal? (lambda r c (and (= r (array:first end)) (= c (array:second end)))))
     (let solution (var:def 0))
-    (let rec:while (lambda (unless (or (heap:empty? q) (> (var:get solution) 0)) (do
+    (let rec:while (lambda (unless (or (queue:empty? q) (> (var:get solution) 0)) (do
             (let first (queue:peek q))
             (queue:dequeue! q)
             (let steps (get first 0))
@@ -64,5 +64,5 @@
     (var:get solution))))
     
     (let PARSED (parse INPUT))
-    
+
     '((part1 PARSED 12))
