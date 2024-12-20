@@ -1,11 +1,10 @@
-(let iINPUT (string:concat-with-lines '(
-"7 6 4 2 1"
-"1 2 7 8 9"
-"9 7 6 2 1"
-"1 3 2 4 5"
-"8 6 4 4 1"
-"1 3 6 7 9"
-)))
+(let INPUT
+"7 6 4 2 1
+1 2 7 8 9
+9 7 6 2 1
+1 3 2 4 5
+8 6 4 4 1
+1 3 6 7 9")
 
 (let parse (lambda input (|> input (string:lines) (array:map (lambda l (|> l (string:words) (from:strings->numbers)))))))
 
@@ -21,6 +20,6 @@
                                   (|> line (array:enumerated-exclude (lambda . j (= i j)))))))))
                             (array:count-of (lambda x (math:positive? (part1 x)))))))
 
-(let PARSED (parse iINPUT))
+(let PARSED (parse INPUT))
 
 '((part1 PARSED) (part2 PARSED))

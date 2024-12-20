@@ -1,10 +1,9 @@
-(let INPUT (string:concat-with-lines '(
-"Register A: 729"
-"Register B: 0"
-"Register C: 0"
-""
-"Program: 0,1,5,4,3,0"
-)))
+(let INPUT 
+"Register A: 729
+Register B: 0
+Register C: 0
+
+Program: 0,1,5,4,3,0")
 
 (let parse (lambda input (do
     (let lines (|> input (string:lines)))

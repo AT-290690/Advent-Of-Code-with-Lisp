@@ -1,15 +1,14 @@
 (let sample 
-  (string:concat-with-lines '(
-      "MMMSXXMASM"
-      "MSAMXMSMSA"
-      "AMXSXMAAMM"
-      "MSAMASMSMX"
-      "XMASAMXAMM"
-      "XXAMMXXAMA"
-      "SMSMSASXSS"
-      "SAXAMASAAA"
-      "MAMMMXMMMM"
-      "MXMXAXMASX")))
+"MMMSXXMASM
+MSAMXMSMSA
+AMXSXMAAMM
+MSAMASMSMX
+XMASAMXAMM
+XXAMMXXAMA
+SMSMSASXSS
+SAXAMASAAA
+MAMMMXMMMM
+MXMXAXMASX")
 
 (let parse (lambda input (|> input (string:lines))))
 
