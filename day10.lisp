@@ -10,7 +10,7 @@
 
 (let parse (lambda input (|> input (string:lines) (array:map from:chars->digits))))
 
-(let part1 (lambda matrix (do 
+(let part1 (lambda matrix (do
   (let coords (matrix:points matrix math:zero?))
   (array:fold coords (lambda a coord (do
         (let visited (new:set8))
@@ -21,12 +21,12 @@
         (set:add! visited (from:yx->key y x))
         (queue:enqueue! queue (array y x))
         (let score (var:def 0))
-        (let rec:while (lambda (unless (queue:empty? queue) (do 
+        (let rec:while (lambda (unless (queue:empty? queue) (do
             (let element (queue:peek queue))
             (queue:dequeue! queue)
             (let y (array:first element))
             (let x (array:second element))
-            (matrix:adjacent matrix matrix:von-neumann-neighborhood y x (lambda cell dir dy dx (do 
+            (matrix:adjacent matrix matrix:von-neumann-neighborhood y x (lambda cell dir dy dx (do
                  (let key (from:yx->key dy dx))
                  (if (and (= (- cell (matrix:get matrix y x)) 1) (not (set:has? visited key))) (do
                     (if (= cell 9) (var:set! score (math:increment (var:get score))) (queue:enqueue! queue (array dy dx)))
@@ -35,7 +35,7 @@
         (rec:while)
         (+ a (var:get score)))) 0))))
 
-(let part2 (lambda matrix (do 
+(let part2 (lambda matrix (do
   (let coords (matrix:points matrix math:zero?))
   (array:fold coords (lambda a coord (do
         (let visited (new:set8))
@@ -47,7 +47,7 @@
         (map:set! visited root-key 1)
         (queue:enqueue! queue (array y x))
         (let score (var:def 0))
-        (let rec:while (lambda (unless (queue:empty? queue) (do 
+        (let rec:while (lambda (unless (queue:empty? queue) (do
             (let element (queue:peek queue))
             (let y (array:first element))
             (let x (array:second element))

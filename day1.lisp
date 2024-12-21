@@ -1,4 +1,4 @@
-(let INPUT 
+(let INPUT
 "3   4
 4   3
 2   5
@@ -6,16 +6,16 @@
 3   9
 3   3")
 
-(let parse (lambda input (|> 
-                            input 
-                            (string:lines) 
-                            (array:map (lambda word (|> 
-                                                      word 
-                                                      (string:words) 
-                                                      (array:select array:not-empty?) 
+(let parse (lambda input (|>
+                            input
+                            (string:lines)
+                            (array:map (lambda word (|>
+                                                      word
+                                                      (string:words)
+                                                      (array:select array:not-empty?)
                                                       (from:strings->numbers)))))))
 
-(let part1 (lambda input (|> 
+(let part1 (lambda input (|>
                           input
                           (array:unzip)
                           (array:map (curry:two array:sort >))
@@ -24,12 +24,12 @@
                           (array:map math:abs)
                           (math:summation))))
                         
-(let part2 (lambda input (do 
+(let part2 (lambda input (do
   (let parts (array:unzip input))
   (let left (array:first parts))
   (let right (array:second parts))
-  (|> 
-    left 
+  (|>
+    left
     (array:map (lambda l (* l (array:count-of right (lambda r (= l r))))))
     (math:summation)))))
 

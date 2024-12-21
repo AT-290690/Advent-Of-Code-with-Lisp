@@ -14,7 +14,7 @@
 
 (let parse (lambda input (|> input (string:lines))))
 
-(let part1 (lambda matrix (do 
+(let part1 (lambda matrix (do
     (let coords ())
     (matrix:enumerated-for matrix (lambda char y x (if (not (= char char:dot)) (array:push! coords (array char y x)))))
     (let copy (matrix:shallow-copy matrix))
@@ -29,8 +29,7 @@
         (let X2 (if (= x1 x2) x2 (if (> x1 x2) (- x2 distanceX) (+ x2 distanceX))))
 
         (if (matrix:in-bounds? copy Y1 X1) (matrix:set! copy Y1 X1 char:hash))
-        (if (matrix:in-bounds? copy Y2 X2) (matrix:set! copy Y2 X2 char:hash))
-    )))
+        (if (matrix:in-bounds? copy Y2 X2) (matrix:set! copy Y2 X2 char:hash)))))
     
      (let map (array:fold coords (lambda a b 
         (if (map:has? a (array (array:first b))) 
@@ -48,7 +47,7 @@
                          (update! y1 y2 x1 x2))))))))))
     (|> copy (array:flat-one) (array:count char:hash)))))
 
-(let part2 (lambda matrix (do 
+(let part2 (lambda matrix (do
     (let coords ())
     (matrix:enumerated-for matrix (lambda char y x (if (not (= char char:dot)) (array:push! coords (array char y x)))))
     (let copy (matrix:shallow-copy matrix))
@@ -56,7 +55,7 @@
 
         (let distanceY (math:abs (- y1 y2)))
         (let distanceX (math:abs (- x1 x2)))
-        (let rec:iter (lambda i (do 
+        (let rec:iter (lambda i (do
         
             (let Y1 (if (= y1 y2) y1 (if (> y1 y2) (+ y1 (* distanceY i)) (- y1 (* distanceY i)))))
             (let X1 (if (= x1 x2) x1 (if (> x1 x2) (+ x1 (* distanceX i)) (- x1 (* distanceX i)))))

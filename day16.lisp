@@ -17,7 +17,7 @@
 
 (let parse (lambda input (|> input (string:lines))))
 
-(let part1 (lambda matrix (do 
+(let part1 (lambda matrix (do
 
     (let from:stats->key (lambda item (|> item (from:numbers->strings) (array:commas))))
 
@@ -41,17 +41,17 @@
         (let dc (get first 4))
         (set:add! seen (from:stats->key '(r c dr dc)))
         (if (goal? r c) cost
-         (do 
+         (do
             (let dirs '('((+ cost 1) (+ r dr) (+ c dc) dr dc)
                         '((+ cost 1000) r c dc (- dr))
                         '((+ cost 1000) r c (- dc) dr)))
-            (array:for dirs (lambda stats (do 
+            (array:for dirs (lambda stats (do
                             (let new-cost (get stats 0))
                             (let nr (get stats 1))
                             (let nc (get stats 2))
                             (let ndr (get stats 3))
                             (let ndc (get stats 4))
-                            (if 
+                            (if
                                 (and
                                     (not (= (matrix:get matrix nr nc) char:hash)) 
                                     (not (set:has? seen (from:stats->key '(nr nc ndr ndc)))))

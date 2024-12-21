@@ -12,7 +12,7 @@ Program: 0,1,5,4,3,0")
     (let registers (|> lines (array:map (lambda x (|> x (string:words) (array:pop!) (from:chars->digits) (from:digits->number))))))
     '(registers program))))
 
-(let part1 (lambda input (do 
+(let part1 (lambda input (do
     (let registers (array:first input))
     (let program (array:second input))
     (let instruction-pointer (var:def 0))
@@ -25,7 +25,7 @@ Program: 0,1,5,4,3,0")
     (let A 0)
     (let B 1)
     (let C 2)
-    (let combo (lambda operand (cond 
+    (let combo (lambda operand (cond
         (math:overlap? operand 0 3) operand
         (= operand 4) (get registers A)
         (= operand 5) (get registers B)
@@ -80,14 +80,14 @@ Program: 0,1,5,4,3,0")
             
     (let get-opcode (lambda (get program (get-instruction-pointer))))
     (let get-operand (lambda (get program (+ (get-instruction-pointer) 1))))
-    (let rec:process (lambda (unless (halt?) (do 
+    (let rec:process (lambda (unless (halt?) (do
         (let opcode (get-opcode))
         (let operand (get-operand))
         (opcodes opcode operand)
         (rec:process)))))
     (rec:process)
-   ; (log-outputs!)
    outputs)))
 
 (let PARSED (parse INPUT))
+
 '((part1 PARSED))

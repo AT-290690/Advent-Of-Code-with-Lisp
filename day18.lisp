@@ -66,3 +66,4 @@
     (let PARSED (parse INPUT))
 
     '((part1 PARSED 12))
+    

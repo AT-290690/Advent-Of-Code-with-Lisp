@@ -16,7 +16,7 @@
     (let rec:fragment (lambda ind (do
         (let i (get blanks ind))
         (if (= (array:last disk) -1) (do (array:pop! disk) (rec:fragment ind))
-            (unless (<= (length disk) i) (do 
+            (unless (<= (length disk) i) (do
             (set! disk i (array:pop! disk))
             (rec:fragment (+ ind 1))))))))
         (rec:fragment 0)

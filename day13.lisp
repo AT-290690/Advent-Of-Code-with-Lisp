@@ -32,9 +32,9 @@ Prize: X=18641, Y=10279")
                                                                             (from:digits->number)))))))
                             (array:partition 3))))
 
-(let part1 (lambda input 
-                (|> 
-                  input 
+(let part1 (lambda input
+                (|>
+                  input
                   (array:fold (lambda a b (do
                     (let A (array:first b))
                     (let B (array:second b))
@@ -52,8 +52,8 @@ Prize: X=18641, Y=10279")
                         a)))
                   0))))
 
-(let part2 (lambda input 
-              (|> input 
+(let part2 (lambda input
+              (|> input
                   (array:fold (lambda a b (do
                       (let A (array:first b))
                       (let B (array:second b))

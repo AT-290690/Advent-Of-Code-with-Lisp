@@ -28,7 +28,7 @@
 61,13,29
 97,13,75,29,47")
 
-(let parse (lambda input (do 
+(let parse (lambda input (do
     (let lines (|> input (string:lines)))
     (let mid (array:find-index lines array:empty?))
     '(
@@ -39,22 +39,22 @@
 
 (let from:chars->key (lambda a b (array:concat '(a '(char:pipe) b))))
 
-(let new:memo (lambda input (array:fold input (lambda memo entry (do 
+(let new:memo (lambda input (array:fold input (lambda memo entry (do
         (let key (from:chars->key (array:first entry) (array:second entry)))
         (let value (array:second entry))
         (if (not (set:has? memo key)) (set:add! memo key))
         memo)) (new:set8))))
 
-(let sum-mid (lambda arr (|> arr 
+(let sum-mid (lambda arr (|> arr
     (array:map (lambda m (get m (math:floor (* (length m) 0.5)))))
     (from:strings->numbers)
     (math:summation))))
 
-(let part1 (lambda input (do 
+(let part1 (lambda input (do
     (let memo (new:memo (array:first input)))
-    (|> 
-    (array:second input) 
-    (array:select (lambda row (do 
+    (|>
+    (array:second input)
+    (array:select (lambda row (do
         (array:enumerated-every? row (lambda current index (do 
                 (let rest (array:slice row (+ index 1) (length row)))
                 (or (array:empty? rest) (not (array:some? rest (lambda other (do
@@ -62,12 +62,12 @@
                 (not (set:has? memo key)))))))))))))
     (sum-mid)))))
 
-(let part2 (lambda input (do 
+(let part2 (lambda input (do
      (let memo (new:memo (array:first input)))
-    (|> 
+    (|>
     (array:second input) 
-    (array:exclude (lambda row (do 
-        (array:enumerated-every? row (lambda current index (do 
+    (array:exclude (lambda row (do
+        (array:enumerated-every? row (lambda current index (do
                 (let rest (array:slice row (+ index 1) (length row)))
                 (or (array:empty? rest) (not (array:some? rest (lambda other (do
                 (let key (from:chars->key current other))

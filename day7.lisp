@@ -9,17 +9,17 @@
 21037: 9 7 18 13
 292: 11 6 16 20")
 
-(let parse (lambda input (do 
-    (let lines (|> input 
+(let parse (lambda input (do
+    (let lines (|> input
                    (string:lines) 
                    (from:array->list) 
                    (list:map (lambda x (do
     (let sides (|> x (string:split (array:first ":"))))
-    (let L (|> sides 
+    (let L (|> sides
                (array:first)
                (from:chars->digits)
                (from:digits->number)))
-    (let R (|> sides 
+    (let R (|> sides
               (array:second)
               (string:words)
               (array:exclude array:empty?)
@@ -44,7 +44,7 @@
                      (part1 (list:tail args) (/ out (list:head args))))
                 (and (> out (list:head args)) (part1 (list:tail args) (- out (list:head args)))))))))
                 
-(let part2 (lambda args out (do 
+(let part2 (lambda args out (do
           (if (list:nil? (list:tail args)) (= out (list:head args))
               (or
                 (and (= (mod out (list:head args)) 0) 

@@ -29,7 +29,7 @@
       (if (matrix:in-bounds? matrix y x) (do 
       (let current (matrix:get matrix y x))
       (if (not (= current char:hash)) (matrix:set! matrix y x char:X))
-      (cond 
+      (cond
           (= current char:hash) (rec:step start (+ angle 1))
           (or (= current char:dot) (= current char:X)) (rec:step start-copy angle)))))))
   (rec:step starting 0)
@@ -64,9 +64,9 @@
   (let path ())
   (let Y (get starting 0))
   (let X (get starting 1))
-  (matrix:enumerated-for matrix (lambda current y x (if 
+  (matrix:enumerated-for matrix (lambda current y x (if
       (= current char:X) (array:push! path '(y x)))))
-  (array:for path (lambda pos (do 
+  (array:for path (lambda pos (do
       (let copy (matrix:shallow-copy input))
       (let y (get pos 0))
       (let x (get pos 1))
