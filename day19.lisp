@@ -23,13 +23,6 @@ bbrgwb")
 (let towels (array:second input))
 (let memo (new:set32))
 
-(let loop:some-range? (lambda start end predicate? (do
-                          (let rec:iterate (lambda i
-                          (if (< i end)
-                                (if (predicate? i) 1 (rec:iterate (+ i 1))))))
-                          (rec:iterate start))))
-
-
 (let dp (lambda str (do 
     (if (map:has? memo str) (map:get memo str)
         (or (loop:some-range? 1 (length str) (lambda i (do 
