@@ -35,6 +35,23 @@ bbrgwb")
             (map:set-and-get! memo str 0))))))
   (array:count-of towels dp))))
 
+(let part2 (lambda input (do
+  (let desings (array:first input))
+  (let patterns (array:fold desings (lambda a b (set:add! a b)) (new:set8)))
+  (let towels (array:second input))
+  (let memo (new:set32))
+  (let max-len (math:maximum (array:map desings length)))
+  (let num-possibilities (lambda stripes
+    (if (map:exists? memo stripes) (map:get memo stripes)
+        (if (array:empty? stripes) 1
+            (map:set-and-get! memo stripes (|> (math:range 0 (math:min (length stripes) max-len))
+                (array:map (lambda index (do
+                    (let pattern (array:slice stripes 0 (math:min index (length stripes))))
+                    (if (set:exists? patterns pattern)
+                        (num-possibilities (array:slice stripes index (length stripes)))))))
+                (math:summation)))))))
+  (|> towels (array:map num-possibilities) (math:summation)))))
+
 (let PARSED (parse INPUT))
 
-'((part1 PARSED))
+'((part1 PARSED) (part2 PARSED))
