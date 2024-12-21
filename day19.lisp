@@ -20,7 +20,7 @@ bbrgwb")
 
   (let patterns (array:fold (array:first input) (lambda a b (set:add! a b)) (new:set8)))
   (let towels (array:second input))
-  (let memo (new:set32))
+  (let memo (new:map32))
 
   (let dp (lambda str (do
       (if (map:has? memo str) (map:get memo str)
@@ -39,7 +39,7 @@ bbrgwb")
   (let desings (array:first input))
   (let patterns (array:fold desings (lambda a b (set:add! a b)) (new:set8)))
   (let towels (array:second input))
-  (let memo (new:set32))
+  (let memo (new:map32))
   (let max-len (math:maximum (array:map desings length)))
   (let num-possibilities (lambda stripes
     (if (map:exists? memo stripes) (map:get memo stripes)

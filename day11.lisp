@@ -19,7 +19,7 @@
 
 (let part2 (lambda input (do
     (let TIMES 25)
-    (let memo (new:set64))
+    (let memo (new:map64))
     (let from:num-and-n->key (lambda b n '(b n)))
     (let count (lambda b n (do
              (let key (from:num-and-n->key b n))
