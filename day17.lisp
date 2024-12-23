@@ -80,12 +80,12 @@ Program: 0,1,5,4,3,0")
             
     (let get-opcode (lambda (get program (get-instruction-pointer))))
     (let get-operand (lambda (get program (+ (get-instruction-pointer) 1))))
-    (let rec:process (lambda (unless (halt?) (do
+    (let recursive:process (lambda (unless (halt?) (do
         (let opcode (get-opcode))
         (let operand (get-operand))
         (opcodes opcode operand)
-        (rec:process)))))
-    (rec:process)
+        (recursive:process)))))
+    (recursive:process)
    outputs)))
 
 (let PARSED (parse INPUT))

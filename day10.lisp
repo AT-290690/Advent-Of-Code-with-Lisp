@@ -21,7 +21,7 @@
         (set:add! visited (from:yx->key y x))
         (queue:enqueue! queue (array y x))
         (let score (var:def 0))
-        (let rec:while (lambda (unless (queue:empty? queue) (do
+        (let recursive:while (lambda (unless (queue:empty? queue) (do
             (let element (queue:peek queue))
             (queue:dequeue! queue)
             (let y (array:first element))
@@ -31,8 +31,8 @@
                  (if (and (= (- cell (matrix:get matrix y x)) 1) (not (set:has? visited key))) (do
                     (if (= cell 9) (var:set! score (math:increment (var:get score))) (queue:enqueue! queue (array dy dx)))
                     (set:add! visited key))))))
-        (rec:while)))))
-        (rec:while)
+        (recursive:while)))))
+        (recursive:while)
         (+ a (var:get score)))) 0))))
 
 (let part2 (lambda matrix (do
@@ -47,7 +47,7 @@
         (map:set! visited root-key 1)
         (queue:enqueue! queue (array y x))
         (let score (var:def 0))
-        (let rec:while (lambda (unless (queue:empty? queue) (do
+        (let recursive:while (lambda (unless (queue:empty? queue) (do
             (let element (queue:peek queue))
             (let y (array:first element))
             (let x (array:second element))
@@ -58,8 +58,8 @@
                  (if (= (- cell (matrix:get matrix y x)) 1) (do
                     (queue:enqueue! queue (array dy dx))
                     (if (map:has? visited key) (map:set! visited key (+ (map:get visited root-key) (map:get visited key))) (map:set! visited key (map:get visited root-key))))))))
-        (rec:while)))))
-        (rec:while)
+        (recursive:while)))))
+        (recursive:while)
         (+ a (var:get score)))) 0))))
 
 (let PARSED (parse INPUT))

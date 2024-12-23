@@ -43,7 +43,7 @@
 
     (let goal? (lambda r c (and (= r (array:first end)) (= c (array:second end)))))
     (let solution (var:def 0))
-    (let rec:while (lambda (unless (or (queue:empty? q) (> (var:get solution) 0)) (do
+    (let recursive:while (lambda (unless (or (queue:empty? q) (> (var:get solution) 0)) (do
             (let first (queue:peek q))
             (queue:dequeue! q)
             (let steps (get first 0))
@@ -59,8 +59,8 @@
                                     (do 
                                     (queue:enqueue! q '((+ steps 1) nr nc))
                                     (set:add! seen (from:stats->key '(nr nc)))))))))
-            (rec:while)))))
-    (rec:while)
+            (recursive:while)))))
+    (recursive:while)
     (var:get solution))))
     
     (let PARSED (parse INPUT))

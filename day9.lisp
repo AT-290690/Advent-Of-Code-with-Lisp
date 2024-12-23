@@ -13,13 +13,13 @@
                     (array:of ch (lambda . -1))))) ())))
     (let blanks ())
     (array:enumerated-for disk (lambda x i (if (= x -1) (array:push! blanks i))))
-    (let rec:fragment (lambda ind (do
+    (let recursive:fragment (lambda ind (do
         (let i (get blanks ind))
-        (if (= (array:last disk) -1) (do (array:pop! disk) (rec:fragment ind))
+        (if (= (array:last disk) -1) (do (array:pop! disk) (recursive:fragment ind))
             (unless (<= (length disk) i) (do
             (set! disk i (array:pop! disk))
-            (rec:fragment (+ ind 1))))))))
-        (rec:fragment 0)
+            (recursive:fragment (+ ind 1))))))))
+        (recursive:fragment 0)
         (|> disk (array:enumerated-fold (lambda a b i (+ a (* b i))) 0)))))
        
 (let PARSED (parse INPUT))

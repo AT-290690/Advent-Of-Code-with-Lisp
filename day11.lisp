@@ -7,15 +7,15 @@
 ; If none of the other rules apply, the stone is replaced by a new stone; the old stone's number multiplied by 2024 is engraved on the new stone.
 (let part1 (lambda input (do
   (let TIMES 5)
-  (let rec:while (lambda stones n (unless (= n 0) 
-      (rec:while (array:fold stones (lambda a b (do
+  (let recursive:while (lambda stones n (unless (= n 0) 
+      (recursive:while (array:fold stones (lambda a b (do
           (let n-digits (math:number-of-digits b))
           (array:merge! a
                 (cond
                   (= b 0) '(1)
                   (math:even? n-digits) '((math:remove-nth-digits b (/ n-digits 2)) (math:keep-nth-digits b (/ n-digits 2)))
                   (*) '((* b 2024)))))) ()) (- n 1)) (length stones))))
-  (rec:while input TIMES))))
+  (recursive:while input TIMES))))
 
 (let part2 (lambda input (do
     (let TIMES 25)

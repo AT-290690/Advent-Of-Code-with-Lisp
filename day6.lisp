@@ -19,7 +19,7 @@
   (let starting (matrix:find-index input (lambda x (= x 94))))
   (matrix:set! matrix (get starting 0) (get starting 1) char:X)
   (let from:matrix->string (lambda matrix (array:lines (array:map matrix (lambda m (array:map m array))))))
-  (let rec:step (lambda start angle (do 
+  (let recursive:step (lambda start angle (do 
       (let current-dir (get dir (mod angle (length dir))))
       (let start-copy (array:shallow-copy start))
       (set! start-copy 0 (+ (get start-copy 0) (get current-dir 0)))
@@ -30,9 +30,9 @@
       (let current (matrix:get matrix y x))
       (if (not (= current char:hash)) (matrix:set! matrix y x char:X))
       (cond
-          (= current char:hash) (rec:step start (+ angle 1))
-          (or (= current char:dot) (= current char:X)) (rec:step start-copy angle)))))))
-  (rec:step starting 0)
+          (= current char:hash) (recursive:step start (+ angle 1))
+          (or (= current char:dot) (= current char:X)) (recursive:step start-copy angle)))))))
+  (recursive:step starting 0)
   (|> matrix (array:flat-one) (array:count char:X)))))
 
 (let part2 (lambda input (do
@@ -42,7 +42,7 @@
   (matrix:set! matrix (get starting 0) (get starting 1) char:X)
   (let from:matrix->string (lambda matrix (array:lines (array:map matrix (lambda m (array:map m array))))))
   (let from:numbers->key (lambda a b (array:concat '((from:digits->chars (from:number->digits a)) '(char:pipe) (from:digits->chars (from:number->digits b))))))
-  (let rec:step (lambda matrix start angle corners (do 
+  (let recursive:step (lambda matrix start angle corners (do 
       (let current-dir (get dir (mod angle (length dir))))
       (let start-copy (array:shallow-copy start))
       (set! start-copy 0 (+ (get start-copy 0) (get current-dir 0)))
@@ -58,9 +58,9 @@
           (let c (map:get corners key))
           (if (= c 4) 
           (var:set! loops (+ (var:get loops) 1))
-          (rec:step matrix start (+ angle 1) (map:set! corners key (+ c 1)))))
-          (or (= current char:dot) (= current char:X)) (rec:step matrix start-copy angle corners)))))))
-  (rec:step matrix starting 0 (new:set64))
+          (recursive:step matrix start (+ angle 1) (map:set! corners key (+ c 1)))))
+          (or (= current char:dot) (= current char:X)) (recursive:step matrix start-copy angle corners)))))))
+  (recursive:step matrix starting 0 (new:set64))
   (let path ())
   (let Y (get starting 0))
   (let X (get starting 1))
@@ -72,7 +72,7 @@
       (let x (get pos 1))
       (matrix:set! copy Y X char:X)
       (matrix:set! copy y x char:hash)
-      (if (not (and (= y Y) (= x X))) (rec:step copy starting 0 (new:set64))))))
+      (if (not (and (= y Y) (= x X))) (recursive:step copy starting 0 (new:set64))))))
   (var:get loops))))
   
 (let PARSED (parse INPUT))
