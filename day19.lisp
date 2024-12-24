@@ -17,40 +17,28 @@ bbrgwb")
         (|> lines (array:slice 2 (length lines)))))))
 
 (let part1 (lambda input (do
-
   (let patterns (array:fold (array:first input) (lambda a b (set:add! a b)) (new:set8)))
   (let towels (array:second input))
-  (let memo (new:map32))
-
-  (let dp (lambda str (do
-      (if (map:has? memo str) (map:get memo str)
-          (or
-            (loop:some-range? 1 (length str) (lambda i (do
+  (let memoized:dp (lambda str (loop:some-range? 1 (length str) (lambda i (do
               (let a (array:slice str 0 i))
               (let b (array:slice str i (length str)))
-              (if (and (set:has? patterns a) (set:has? patterns b))
-                  (map:set-and-get! memo str 1)
-                  (if (and (dp a) (dp b))
-                      (map:set-and-get! memo str 1))))))
-            (map:set-and-get! memo str 0))))))
-  (array:count-of towels dp))))
+              (or (and (set:has? patterns a) (set:has? patterns b)) (and (memoized:dp a) (memoized:dp b))))))))
+  (array:count-of towels memoized:dp))))
 
 (let part2 (lambda input (do
   (let desings (array:first input))
   (let patterns (array:fold desings (lambda a b (set:add! a b)) (new:set8)))
   (let towels (array:second input))
-  (let memo (new:map32))
   (let max-len (math:maximum (array:map desings length)))
-  (let num-possibilities (lambda stripes
-    (if (map:exists? memo stripes) (map:get memo stripes)
-        (if (array:empty? stripes) 1
-            (map:set-and-get! memo stripes (|> (math:range 0 (math:min (length stripes) max-len))
+  (let memoized:num-possibilities (lambda stripes
+    (if (array:empty? stripes) 1
+            (|> (math:range 0 (math:min (length stripes) max-len))
                 (array:map (lambda index (do
                     (let pattern (array:slice stripes 0 (math:min index (length stripes))))
                     (if (set:exists? patterns pattern)
-                        (num-possibilities (array:slice stripes index (length stripes)))))))
-                (math:summation)))))))
-  (|> towels (array:map num-possibilities) (math:summation)))))
+                        (memoized:num-possibilities (array:slice stripes index (length stripes)))))))
+                (math:summation)))))
+  (|> towels (array:map memoized:num-possibilities) (math:summation)))))
 
 (let PARSED (parse INPUT))
 

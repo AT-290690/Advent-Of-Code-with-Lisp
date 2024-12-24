@@ -7,11 +7,12 @@ access(path, (err) => {
     console.log(`\x1b[31mSolution for day ${day} does not exist\x1b[33m\n`);
   } else {
     const file = readFileSync(path, "utf-8");
-    const solution = fez(file, {
-      mutation: 1,
-      compile: 1,
-      eval: 1,
-    });
+    const solution = eval(
+      fez(file, {
+        mutation: 1,
+        compile: 1,
+      })
+    );
     if (Array.isArray(solution))
       console.log(
         solution
