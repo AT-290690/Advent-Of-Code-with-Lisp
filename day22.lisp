@@ -37,8 +37,8 @@
           (mix)         ; Then, mix this result into the secret number.
           (prune)       ; Finally, prune the secret number.
 
-          (/ 32)        ; Calculate the result of dividing the secret number by 32.
-          (math:floor)  ; Round the result down to the nearest integer.
+          (// 32)        ; Calculate the result of dividing the secret number by 32.
+                        ; Round the result down to the nearest integer.
           
           (mix)         ; Then, mix this result into the secret number.
           (prune)       ; Finally, prune the secret number.
