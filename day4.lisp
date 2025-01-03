@@ -25,8 +25,7 @@ MXMXAXMASX")
                         (= i (- size 1)) (var:set! out (+ (var:get out) 1))
                         (*) (seek matrix y x Y X (+ i 1)))))))
     (array:for coords (lambda coord (do
-        (let y (array:first coord))
-        (let x (array:second coord))
+        (let [y x .] coord)
         (array:for matrix:moore-neighborhood (lambda dir (seek matrix y x (array:first dir) (array:second dir) 1))))))
     (var:get out))))
 
@@ -39,8 +38,7 @@ MXMXAXMASX")
                           (matrix:in-bounds? matrix (+ (array:first dir) -1) (+ (array:second dir) -1)) 
                           (matrix:in-bounds? matrix (+ (array:first dir) 1) (+ (array:second dir) 1)))))
       (array:fold (lambda a coord (do
-        (let y (array:first coord))
-        (let x (array:second coord))
+        (let [y x .] coord)
         (let A (matrix:get matrix (+ y -1) (+ x -1)))
         (let B (matrix:get matrix (+ y -1) (+ x 1)))
         (let C (matrix:get matrix (+ y 1) (+ x -1)))
@@ -53,4 +51,4 @@ MXMXAXMASX")
 
 (let PARSED (parse sample))
 
-'((part1 PARSED) (part2 PARSED))
+[(part1 PARSED) (part2 PARSED)]

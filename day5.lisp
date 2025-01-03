@@ -75,4 +75,4 @@
     (array:map (lambda x (array:sort x (lambda a b (not (set:has? memo (from:chars->key a b)))))))
     (sum-mid)))))
 
-    '((part1 PARSED) (part2 PARSED))
+    [(part1 PARSED) (part2 PARSED)]

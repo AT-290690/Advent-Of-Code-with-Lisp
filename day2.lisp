@@ -22,4 +22,4 @@
 
 (let PARSED (parse INPUT))
 
-'((part1 PARSED) (part2 PARSED))
+[(part1 PARSED) (part2 PARSED)]

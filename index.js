@@ -10,7 +10,7 @@ access(path, (err) => {
     const solution = eval(
       fez(file, {
         mutation: 1,
-        compile: 1,
+        compile: 0,
       })
     );
     if (Array.isArray(solution))

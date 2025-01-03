@@ -73,4 +73,4 @@ p=9,5 v=-3,-3")
 
 (let PARSED (parse INPUT))
 
-'((part1 PARSED))
+[(part1 PARSED)]

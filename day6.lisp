@@ -12,7 +12,7 @@
 
 (let parse (lambda input (|> input (string:lines))))
 
-(let dir '('(-1 0) '(0 1) '(1 0) '(0 -1)))
+(let dir [[-1 0] [0 1] [1 0] [0 -1]])
 
 (let part1 (lambda input (do
   (let matrix (matrix:shallow-copy input)) 
@@ -24,8 +24,7 @@
       (let start-copy (array:shallow-copy start))
       (set! start-copy 0 (+ (get start-copy 0) (get current-dir 0)))
       (set! start-copy 1 (+ (get start-copy 1) (get current-dir 1)))
-      (let y (get start-copy 0))
-      (let x (get start-copy 1))
+      (let [y x .] start-copy)
       (if (matrix:in-bounds? matrix y x) (do 
       (let current (matrix:get matrix y x))
       (if (not (= current char:hash)) (matrix:set! matrix y x char:X))
@@ -47,8 +46,7 @@
       (let start-copy (array:shallow-copy start))
       (set! start-copy 0 (+ (get start-copy 0) (get current-dir 0)))
       (set! start-copy 1 (+ (get start-copy 1) (get current-dir 1)))
-      (let y (get start-copy 0))
-      (let x (get start-copy 1))
+      (let [y x .] start-copy)
       (if (matrix:in-bounds? matrix y x) (do 
       (let current (matrix:get matrix y x))
       (if (not (= current char:hash)) (matrix:set! matrix y x char:X))
@@ -61,9 +59,8 @@
           (recursive:step matrix start (+ angle 1) (map:set! corners key (+ c 1)))))
           (or (= current char:dot) (= current char:X)) (recursive:step matrix start-copy angle corners)))))))
   (recursive:step matrix starting 0 (new:set64))
-  (let path ())
-  (let Y (get starting 0))
-  (let X (get starting 1))
+  (let path [])
+  (let [Y X .] starting)
   (matrix:enumerated-for matrix (lambda current y x (if
       (= current char:X) (array:push! path '(y x)))))
   (array:for path (lambda pos (do

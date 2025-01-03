@@ -55,4 +55,4 @@ td-yn")
               (var:increment! total))))))))
     (// (var:get total) 6))))
 
-'((part1 (parse INPUT)))
+[(part1 (parse INPUT))]

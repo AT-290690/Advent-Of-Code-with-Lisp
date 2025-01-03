@@ -25,9 +25,7 @@
                           (math:summation))))
                         
 (let part2 (lambda input (do
-  (let parts (array:unzip input))
-  (let left (array:first parts))
-  (let right (array:second parts))
+  (let [left right .] (array:unzip input))
   (|>
     left
     (array:map (lambda l (* l (array:count-of right (lambda r (= l r))))))
@@ -35,4 +33,4 @@
 
 (let PARSED (parse INPUT))
 
-'((part1 PARSED) (part2 PARSED))
+[(part1 PARSED) (part2 PARSED)]

@@ -25,14 +25,14 @@
               (array:exclude array:empty?)
               (from:array->list)
               (list:map from:string->number)))
-    `(L R)))))))))
+    {L R}))))))))
 
     
 (let sum (lambda input solution (|> input
             (list:map (lambda x (do
             (let left (list:head x))
             (let right (list:reverse (list:head (list:tail x))))
-            `(left (solution right left)))))
+            {left (solution right left)})))
             (list:filter (lambda x (= (list:head (list:tail x)) 1)))
             (list:map list:head)
             (math:list-summation))))
@@ -57,4 +57,4 @@
 
 (let PARSED (parse INPUT))
 
-'((sum PARSED part1) (sum PARSED part2))
+[(sum PARSED part1) (sum PARSED part2)]
