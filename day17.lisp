@@ -90,4 +90,4 @@ Program: 0,1,5,4,3,0")
 
 (let PARSED (parse INPUT))
 
-'((part1 PARSED))
+(array (part1 PARSED))

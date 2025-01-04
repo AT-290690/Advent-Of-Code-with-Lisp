@@ -1,7 +1,7 @@
-import { fez } from "fez-lisp";
+import { compile, parse } from "fez-lisp";
 import { readFileSync, readdirSync } from "fs";
 const logError = (error) => console.log("\x1b[31m", `\n${error}\n`, "\x1b[0m");
-const logSuccess = (output) => console.log('\x1b[32m', output, "\x1b[0m");
+const logSuccess = (output) => console.log("\x1b[32m", output, "\x1b[0m");
 const isEqual = (a, b) =>
   (Array.isArray(a) &&
     a.length === b.length &&
@@ -14,7 +14,7 @@ const map = [
   { file: "day11.lisp", result: [13, 55312] },
   { file: "day13.lisp", result: [480, 875318608908] },
   { file: "day14.lisp", result: [12] },
-  { file: "day16.lisp", result: [0] },
+  { file: "day16.lisp", result: [7036] },
   { file: "day17.lisp", result: [[4, 6, 3, 5, 6, 3, 5, 2, 1, 0]] },
   { file: "day18.lisp", result: [22] },
   { file: "day19.lisp", result: [6, 16] },
@@ -37,12 +37,9 @@ if (
     .filter((x) => x.endsWith(".lisp"))
     .every((x) => {
       const a = map.get(x);
-      const b = eval(
-        fez(readFileSync(x, "utf-8"), {
-          mutation: 1,
-          compile: 1,
-        })
-      );
+      const b = new Function(
+        `return ${compile(parse(readFileSync(x, "utf-8")))}`
+      )();
       const assertion = isEqual(a, b);
       if (!assertion) {
         logError(`${x} failed!`);
@@ -56,11 +53,6 @@ if (
 //     .filter((x) => x.endsWith(".lisp"))
 //     .map((file) => ({
 //       file,
-//       result: eval(
-//         fez(readFileSync(file, "utf-8"), {
-//           mutation: 1,
-//           compile: 1,
-//         })
-//       ),
+//       result: new Function(`return ${compile(parse(readFileSync(x, "utf-8")))}`)()
 //     }))
 // );

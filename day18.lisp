@@ -33,13 +33,13 @@
     (let W (math:maximum (array:map input array:second)))
     (let matrix (|> (math:zeroes (+ H 1)) (array:map (lambda . (array:map (math:zeroes (+ W 1)) (lambda . char:dot)) ))))
     (array:for (array:slice input 0 size) (lambda x (matrix:set! matrix (array:second x) (array:first x) char:hash)))
-    (let start '(0 0))
-    (let end '(H W))
+    (let start (array 0 0))
+    (let end (array H W))
   
     (let q (new:queue))
-    (queue:enqueue! q '(0 (array:first start) (array:second start)))
+    (queue:enqueue! q (array 0 (array:first start) (array:second start)))
     (let seen (new:set32))
-    (set:add! seen (from:stats->key '((array:first start) (array:second start))))
+    (set:add! seen (from:stats->key (array (array:first start) (array:second start))))
 
     (let goal? (lambda r c (and (= r (array:first end)) (= c (array:second end)))))
     (let solution (var:def 0))
@@ -53,12 +53,12 @@
                  (lambda current . nr nc (do
                             (if (and 
                                     (not (= current char:hash)) 
-                                    (not (set:has? seen (from:stats->key '(nr nc)))))
+                                    (not (set:has? seen (from:stats->key (array nr nc)))))
                                 (if (goal? nr nc) 
                                     (var:set! solution (+ steps 1))
                                     (do 
-                                    (queue:enqueue! q '((+ steps 1) nr nc))
-                                    (set:add! seen (from:stats->key '(nr nc)))))))))
+                                    (queue:enqueue! q (array (+ steps 1) nr nc))
+                                    (set:add! seen (from:stats->key (array nr nc)))))))))
             (recursive:while)))))
     (recursive:while)
     (var:get solution))))

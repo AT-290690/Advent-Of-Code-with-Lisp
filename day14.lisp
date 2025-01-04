@@ -32,10 +32,10 @@ p=9,5 v=-3,-3")
     ; .....+..... 4 
     ; .....+..... 5
     ; .....+..... 6
-    (let Q1 '('(0 0) '((- QWIDTH 1) (- QHEIGHT 1))))
-    (let Q2 '('((+ QWIDTH 1) 0) '((- WIDTH 1) (- QHEIGHT 1))))
-    (let Q3 '('(0 (+ QHEIGHT 1)) '((- QWIDTH 1) (- HEIGHT 1))))
-    (let Q4 '('((+ QWIDTH 1) (+ QHEIGHT 1)) '((- WIDTH 1) (- HEIGHT 1))))
+    (let Q1 (array (array 0 0) (array (- QWIDTH 1) (- QHEIGHT 1))))
+    (let Q2 (array (array (+ QWIDTH 1) 0) (array (- WIDTH 1) (- QHEIGHT 1))))
+    (let Q3 (array (array 0 (+ QHEIGHT 1)) (array (- QWIDTH 1) (- HEIGHT 1))))
+    (let Q4 (array (array (+ QWIDTH 1) (+ QHEIGHT 1)) (array (- WIDTH 1) (- HEIGHT 1))))
 
     (|> input
         (array:map (lambda robot (do
@@ -68,7 +68,7 @@ p=9,5 v=-3,-3")
                 (math:overlap? x (array:first (array:first Q4)) (array:first (array:second Q4)))
                 (math:overlap? y (array:second (array:first Q4)) (array:second (array:second Q4)))
                 )  (set! a 3 (+ (get a 3) 1))
-            (*) 0) a)) '(0 0 0 0))
+            (*) 0) a)) (array 0 0 0 0))
         (math:product)))))
 
 (let PARSED (parse INPUT))

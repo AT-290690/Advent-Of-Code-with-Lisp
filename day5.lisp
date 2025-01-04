@@ -31,13 +31,13 @@
 (let parse (lambda input (do
     (let lines (|> input (string:lines)))
     (let mid (array:find-index lines array:empty?))
-    '(
+    (array 
         (|> lines (array:slice 0 mid) (array:map (lambda x (|> x (string:split char:pipe))))) 
         (|> lines (array:slice (+ mid 1) (length lines)) (array:map (lambda x (|> x (string:commas)))))))))
 
 (let PARSED (parse INPUT))
 
-(let from:chars->key (lambda a b (array:concat '(a '(char:pipe) b))))
+(let from:chars->key (lambda a b (array:concat (array a (array char:pipe) b))))
 
 (let new:memo (lambda input (array:fold input (lambda memo entry (do
         (let key (from:chars->key (array:first entry) (array:second entry)))

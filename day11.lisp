@@ -12,9 +12,9 @@
           (let n-digits (math:number-of-digits b))
           (array:merge! a
                 (cond
-                  (= b 0) '(1)
-                  (math:even? n-digits) '((math:remove-nth-digits b (/ n-digits 2)) (math:keep-nth-digits b (/ n-digits 2)))
-                  (*) '((* b 2024)))))) ()) (- n 1)) (length stones))))
+                  (= b 0) (array 1)
+                  (math:even? n-digits) (array (math:remove-nth-digits b (/ n-digits 2)) (math:keep-nth-digits b (/ n-digits 2)))
+                  (*) (array (* b 2024)))))) ()) (- n 1)) (length stones))))
   (recursive:while input TIMES))))
 
 (let part2 (lambda input (do

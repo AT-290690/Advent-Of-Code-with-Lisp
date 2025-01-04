@@ -36,7 +36,7 @@
         (heap:pop! pq lower?)
         (let [cost r c dr dc .] first)
         (set:add! seen (from:stats->key [r c dr dc]))
-        (if [goal? r c] cost
+        (if (goal? r c) cost
          (do
             (let dirs [[(+ cost 1) (+ r dr) (+ c dc) dr dc]
                         [(+ cost 1000) r c dc (- dr)]

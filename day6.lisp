@@ -40,7 +40,7 @@
   (let starting (matrix:find-index matrix (lambda x (= x 94))))
   (matrix:set! matrix (get starting 0) (get starting 1) char:X)
   (let from:matrix->string (lambda matrix (array:lines (array:map matrix (lambda m (array:map m array))))))
-  (let from:numbers->key (lambda a b (array:concat '((from:digits->chars (from:number->digits a)) '(char:pipe) (from:digits->chars (from:number->digits b))))))
+  (let from:numbers->key (lambda a b (array:concat (array (from:digits->chars (from:number->digits a)) (array char:pipe) (from:digits->chars (from:number->digits b))))))
   (let recursive:step (lambda matrix start angle corners (do 
       (let current-dir (get dir (mod angle (length dir))))
       (let start-copy (array:shallow-copy start))
@@ -62,7 +62,7 @@
   (let path [])
   (let [Y X .] starting)
   (matrix:enumerated-for matrix (lambda current y x (if
-      (= current char:X) (array:push! path '(y x)))))
+      (= current char:X) (array:push! path (array y x)))))
   (array:for path (lambda pos (do
       (let copy (matrix:shallow-copy input))
       (let y (get pos 0))
@@ -74,4 +74,4 @@
   
 (let PARSED (parse INPUT))
 
-'((part1 PARSED) (part2 PARSED))
+(array (part1 PARSED) (part2 PARSED))
