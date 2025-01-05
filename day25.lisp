@@ -44,8 +44,8 @@
 
 (let part1 (lambda input (do
     (let M (- (length (array:first input)) 2))
-    (let handle-lock (lambda a (array:slice a 1 (length a))))
-    (let handle-key (lambda a (array:slice a 0 (- (length a) 1))))
+    (let handle-a (lambda a (array:slice a 1 (length a))))
+    (let handle-b (lambda a (array:slice a 0 (- (length a) 1))))
     (let from:heights->height (lambda heights cb (do 
         (let h (math:zeroes (length (array:first heights))))
         (array:for (cb heights) (lambda x (do 
@@ -58,18 +58,19 @@
                     (array:map (lambda x (- M (tuple:add x)))) 
                     (array:some? (lambda a (< a 0))) 
                     (not)))) (math:summation)))))
-    (let LOCK 0)
-    (let KEY 1)
-    (let lock? (lambda x (array:some? (get x 0) (lambda y (= y char:dot)))))
-    (let from:key->heights (lambda matrix (|> matrix (array:enumerated-map (lambda y i (|> y (array:map (lambda c (if (= c char:hash) i -1)))))))))
-    (let from:lock->heights (lambda matrix (|> matrix (array:enumerated-map (lambda y i (|> y (array:map (lambda c (if (= c char:hash) (- (length y) i 1) -1)))))))))
+    (let A 0)
+    (let B 1)
+    
+    (let from:b->heights (lambda matrix (|> matrix (array:enumerated-map (lambda y i (|> y (array:map (lambda c (if (= c char:hash) i -1)))))))))
+    (let from:a->heights (lambda matrix (|> matrix (array:enumerated-map (lambda y i (|> y (array:map (lambda c (if (= c char:hash) (- (length y) i 1) -1)))))))))
+    
     (let heights (|> input (array:map (lambda x
-        (if (lock? x)
-        [KEY (|> x (from:lock->heights) (from:heights->height handle-lock))]
-        [LOCK (|> x (from:key->heights) (from:heights->height handle-key))])))))
+        (if (array:some? (get x 0) (lambda y (= y char:dot)))
+        [B (|> x (from:a->heights) (from:heights->height handle-a))]
+        [A (|> x (from:b->heights) (from:heights->height handle-b))])))))
 
-    (let locks (|> heights (array:select (lambda x (= (array:first x) LOCK))) (array:map array:second)))
-    (let keys (|> heights (array:select (lambda x (= (array:first x) KEY))) (array:map array:second)))
+    (let locks (|> heights (array:select (lambda x (= (array:first x) A))) (array:map array:second)))
+    (let keys (|> heights (array:select (lambda x (= (array:first x) B))) (array:map array:second)))
 
     (|> (math:cartesian-product locks keys) (fit?)))))
 
