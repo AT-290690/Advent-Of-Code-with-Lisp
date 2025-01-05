@@ -21,6 +21,7 @@ const map = [
   { file: "day2.lisp", result: [2, 4] },
   { file: "day22.lisp", result: [37327623] },
   { file: "day23.lisp", result: [7] },
+  { file: "day25.lisp", result: [3] },
   { file: "day3.lisp", result: [161, 48] },
   { file: "day4.lisp", result: [18, 9] },
   { file: "day5.lisp", result: [143, 123] },
