@@ -6,6 +6,7 @@ access(path, (err) => {
   if (err) {
     console.log(`\x1b[31mSolution for day ${day} does not exist\x1b[33m\n`);
   } else {
+    try {
     const solution = new Function(
       `return ${compile(parse(readFileSync(path, "utf-8")))}`
     )();
@@ -17,5 +18,8 @@ access(path, (err) => {
           )
           .join("\n")
       );
+    } catch(err) {
+      console.log(`\x1b[31m${err}\x1b[33m\n`);
+    }
   }
 });
