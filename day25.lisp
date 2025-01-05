@@ -40,14 +40,7 @@
 #####
 ")
 
-(let array:chunks (lambda arr predicate? (do 
-        (|> arr 
-        (array:ranges predicate?)
-        (array:map (lambda [start end .] (array:exclude (array:slice arr start end) predicate?)))))))
-
-(let parse (lambda input (|> input (string:trim) (string:lines) 
-        (array:append! []) 
-(array:chunks array:empty?))))
+(let parse (lambda input (|> input (string:trim) (string:lines) (array:append! []) (array:chunks array:empty?))))
 
 (let part1 (lambda input (do
     (let M (- (length (array:first input)) 2))
