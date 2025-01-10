@@ -25,7 +25,8 @@
                           (math:summation))))
                         
 (let part2 (lambda input (do
-  (let [left right .] (array:unzip input))
+  (let unzipped (array:unzip input))
+  (let [left right .] unzipped)
   (|>
     left
     (array:map (lambda l (* l (array:count-of right (lambda r (= l r))))))

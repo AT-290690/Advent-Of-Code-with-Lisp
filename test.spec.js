@@ -37,15 +37,19 @@ if (
   readdirSync("./")
     .filter((x) => x.endsWith(".lisp"))
     .every((x) => {
-      const a = map.get(x);
-      const b = new Function(
-        `return ${compile(parse(readFileSync(x, "utf-8")))}`
-      )();
-      const assertion = isEqual(a, b);
-      if (!assertion) {
-        logError(`${x} failed!`);
+      try {
+        const a = map.get(x);
+        const b = new Function(
+          `return ${compile(parse(readFileSync(x, "utf-8")))}`
+        )();
+        const assertion = isEqual(a, b);
+        if (!assertion) {
+          logError(`${x} failed!`);
+        }
+        return assertion;
+      } catch (error) {
+        logError(error.message);
       }
-      return assertion;
     })
 )
   logSuccess("All tests passed");
