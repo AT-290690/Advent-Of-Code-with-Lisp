@@ -50,7 +50,7 @@
         (let h (math:zeroes (length (array:first heights))))
         (array:for (cb heights) (lambda x (do 
             (array:enumerated-for x (lambda y i (do 
-                (set! h i (math:max (get h i) y)))))))) h)))
+                (array:alter! h i (math:max (get h i) y)))))))) h)))
 
     (let fit? (lambda pairs (do 
         (|> pairs (array:map (lambda [lock key .] 

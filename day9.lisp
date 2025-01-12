@@ -17,7 +17,7 @@
         (let i (get blanks ind))
         (if (= (array:last disk) -1) (do (array:pop! disk) (recursive:fragment ind))
             (unless (<= (length disk) i) (do
-            (set! disk i (array:pop! disk))
+            (array:alter! disk i (array:pop! disk))
             (recursive:fragment (+ ind 1))))))))
         (recursive:fragment 0)
         (|> disk (array:enumerated-fold (lambda a b i (+ a (* b i))) 0)))))
