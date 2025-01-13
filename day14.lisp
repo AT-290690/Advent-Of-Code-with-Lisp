@@ -55,19 +55,19 @@ p=9,5 v=-3,-3")
             (and
                 (math:overlap? x (array:first (array:first Q1)) (array:first (array:second Q1)))
                 (math:overlap? y (array:second (array:first Q1)) (array:second (array:second Q1))))
-                    (array:alter! a 0 (+ (get a 0) 1))
+                    (array:alter! a 0 (+ (array:get a 0) 1))
            (and
                 (math:overlap? x (array:first (array:first Q2)) (array:first (array:second Q2)))
                 (math:overlap? y (array:second (array:first Q2)) (array:second (array:second Q2))))
-                    (array:alter! a 1 (+ (get a 1) 1))
+                    (array:alter! a 1 (+ (array:get a 1) 1))
             (and
                 (math:overlap? x (array:first (array:first Q3)) (array:first (array:second Q3)))
                 (math:overlap? y (array:second (array:first Q3)) (array:second (array:second Q3))))  
-                    (array:alter! a 2 (+ (get a 2) 1))
+                    (array:alter! a 2 (+ (array:get a 2) 1))
             (and
                 (math:overlap? x (array:first (array:first Q4)) (array:first (array:second Q4)))
                 (math:overlap? y (array:second (array:first Q4)) (array:second (array:second Q4))))
-                    (array:alter! a 3 (+ (get a 3) 1))
+                    (array:alter! a 3 (+ (array:get a 3) 1))
             (*) 0) a)) (array 0 0 0 0))
         (math:product)))))
 

@@ -14,9 +14,9 @@
     (let blanks ())
     (array:enumerated-for disk (lambda x i (if (= x -1) (array:push! blanks i))))
     (let recursive:fragment (lambda ind (do
-        (let i (get blanks ind))
+        (let i (array:get blanks ind))
         (if (= (array:last disk) -1) (do (array:pop! disk) (recursive:fragment ind))
-            (unless (<= (length disk) i) (do
+            (unless (<= (array:length disk) i) (do
             (array:alter! disk i (array:pop! disk))
             (recursive:fragment (+ ind 1))))))))
         (recursive:fragment 0)

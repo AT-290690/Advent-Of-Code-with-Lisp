@@ -33,7 +33,7 @@
     (let mid (array:find-index lines array:empty?))
     (array 
         (|> lines (array:slice 0 mid) (array:map (lambda x (|> x (string:split char:pipe))))) 
-        (|> lines (array:slice (+ mid 1) (length lines)) (array:map (lambda x (|> x (string:commas)))))))))
+        (|> lines (array:slice (+ mid 1) (array:length lines)) (array:map (lambda x (|> x (string:commas)))))))))
 
 (let PARSED (parse INPUT))
 
@@ -46,7 +46,7 @@
         memo)) (new:set8))))
 
 (let sum-mid (lambda arr (|> arr
-    (array:map (lambda m (get m (math:floor (* (length m) 0.5)))))
+    (array:map (lambda m (array:get m (math:floor (* (array:length m) 0.5)))))
     (from:strings->numbers)
     (math:summation))))
 
@@ -56,7 +56,7 @@
     (array:second input)
     (array:select (lambda row (do
         (array:enumerated-every? row (lambda current index (do 
-                (let rest (array:slice row (+ index 1) (length row)))
+                (let rest (array:slice row (+ index 1) (array:length row)))
                 (or (array:empty? rest) (not (array:some? rest (lambda other (do
                 (let key (from:chars->key current other))
                 (not (set:has? memo key)))))))))))))
@@ -68,7 +68,7 @@
     (array:second input) 
     (array:exclude (lambda row (do
         (array:enumerated-every? row (lambda current index (do
-                (let rest (array:slice row (+ index 1) (length row)))
+                (let rest (array:slice row (+ index 1) (array:length row)))
                 (or (array:empty? rest) (not (array:some? rest (lambda other (do
                 (let key (from:chars->key current other))
                 (not (set:has? memo key)))))))))))))

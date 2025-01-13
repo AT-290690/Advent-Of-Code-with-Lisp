@@ -14,7 +14,7 @@
                 (cond
                   (= b 0) (array 1)
                   (math:even? n-digits) (array (math:remove-nth-digits b (/ n-digits 2)) (math:keep-nth-digits b (/ n-digits 2)))
-                  (*) (array (* b 2024)))))) ()) (- n 1)) (length stones))))
+                  (*) (array (* b 2024)))))) ()) (- n 1)) (array:length stones))))
   (recursive:while input TIMES))))
 
 (let part2 (lambda input (do
@@ -22,12 +22,12 @@
     (let memoized:count (lambda b n (cond 
                     (= n 0) 1
                     (= b 0) (memoized:count 1 (- n 1))
-                    (math:even? (length (from:number->digits b))) (do 
+                    (math:even? (array:length (from:number->digits b))) (do 
                       (let str (from:number->digits b))
-                      (let n-digits (length str))
+                      (let n-digits (array:length str))
                       (let half (/ n-digits 2))
                       (let left (|> str (array:slice 0 half) (from:digits->number)))
-                      (let right (|> str (array:slice half (length str)) (from:digits->number)))
+                      (let right (|> str (array:slice half (array:length str)) (from:digits->number)))
                       (+ (memoized:count left (- n 1)) (memoized:count right (- n 1))))
                     (*) (memoized:count (* b 2024) (- n 1)))))
     (|> input (array:map (lambda x (memoized:count x TIMES))) (math:summation)))))

@@ -17,13 +17,13 @@
 (let part1 (lambda input (do
   (let matrix (matrix:shallow-copy input)) 
   (let starting (matrix:find-index input (lambda x (= x 94))))
-  (matrix:set! matrix (get starting 0) (get starting 1) char:X)
+  (matrix:set! matrix (array:get starting 0) (array:get starting 1) char:X)
   (let from:matrix->string (lambda matrix (array:lines (array:map matrix (lambda m (array:map m array))))))
   (let recursive:step (lambda start angle (do 
-      (let current-dir (get dir (mod angle (length dir))))
+      (let current-dir (array:get dir (mod angle (array:length dir))))
       (let start-copy (array:shallow-copy start))
-      (array:alter! start-copy 0 (+ (get start-copy 0) (get current-dir 0)))
-      (array:alter! start-copy 1 (+ (get start-copy 1) (get current-dir 1)))
+      (array:alter! start-copy 0 (+ (array:get start-copy 0) (array:get current-dir 0)))
+      (array:alter! start-copy 1 (+ (array:get start-copy 1) (array:get current-dir 1)))
       (let [y x .] start-copy)
       (if (matrix:in-bounds? matrix y x) (do 
       (let current (matrix:get matrix y x))
@@ -38,14 +38,14 @@
   (let matrix (matrix:shallow-copy input)) 
   (let loops (var:def 0))
   (let starting (matrix:find-index matrix (lambda x (= x 94))))
-  (matrix:set! matrix (get starting 0) (get starting 1) char:X)
+  (matrix:set! matrix (array:get starting 0) (array:get starting 1) char:X)
   (let from:matrix->string (lambda matrix (array:lines (array:map matrix (lambda m (array:map m array))))))
   (let from:numbers->key (lambda a b (array:concat (array (from:digits->chars (from:number->digits a)) (array char:pipe) (from:digits->chars (from:number->digits b))))))
   (let recursive:step (lambda matrix start angle corners (do 
-      (let current-dir (get dir (mod angle (length dir))))
+      (let current-dir (array:get dir (mod angle (array:length dir))))
       (let start-copy (array:shallow-copy start))
-      (array:alter! start-copy 0 (+ (get start-copy 0) (get current-dir 0)))
-      (array:alter! start-copy 1 (+ (get start-copy 1) (get current-dir 1)))
+      (array:alter! start-copy 0 (+ (array:get start-copy 0) (array:get current-dir 0)))
+      (array:alter! start-copy 1 (+ (array:get start-copy 1) (array:get current-dir 1)))
       (let [y x .] start-copy)
       (if (matrix:in-bounds? matrix y x) (do 
       (let current (matrix:get matrix y x))
@@ -65,8 +65,8 @@
       (= current char:X) (array:push! path (array y x)))))
   (array:for path (lambda pos (do
       (let copy (matrix:shallow-copy input))
-      (let y (get pos 0))
-      (let x (get pos 1))
+      (let y (array:get pos 0))
+      (let x (array:get pos 1))
       (matrix:set! copy Y X char:X)
       (matrix:set! copy y x char:hash)
       (if (not (and (= y Y) (= x X))) (recursive:step copy starting 0 (new:set64))))))

@@ -35,15 +35,15 @@
         (if (map:has? a (array (array:first b))) 
             (map:set! a (array (array:first b)) (array:merge (map:get a (array (array:first b))) (array (array:tail b)))) 
             (map:set! a (array (array:first b)) (array (array:tail b))))) (new:set8)))
-     (let pairs (|> map (array:flat-one) (array:map array:second) (array:exclude (lambda x (= (length x) 1)))))
+     (let pairs (|> map (array:flat-one) (array:map array:second) (array:exclude (lambda x (= (array:length x) 1)))))
      (array:enumerated-for pairs (lambda pair i (do
-                (loop:for-range 0 (length pair) (lambda i 
-                    (loop:for-range i (length pair) (lambda j 
+                (loop:for-range 0 (array:length pair) (lambda i 
+                    (loop:for-range i (array:length pair) (lambda j 
                         (if (<> i j) (do
-                         (let y1 (array:first (get pair i)))
-                         (let y2 (array:first (get pair j)))
-                         (let x1 (array:second (get pair i)))
-                         (let x2 (array:second (get pair j)))
+                         (let y1 (array:first (array:get pair i)))
+                         (let y2 (array:first (array:get pair j)))
+                         (let x1 (array:second (array:get pair i)))
+                         (let x2 (array:second (array:get pair j)))
                          (update! y1 y2 x1 x2))))))))))
     (|> copy (array:flat-one) (array:count char:hash)))))
 
@@ -74,15 +74,15 @@
         (if (map:has? a (array (array:first b))) 
             (map:set! a (array (array:first b)) (array:merge (map:get a (array (array:first b))) (array (array:tail b)))) 
             (map:set! a (array (array:first b)) (array (array:tail b))))) (new:set8)))
-     (let pairs (|> map (array:flat-one) (array:map array:second) (array:exclude (lambda x (= (length x) 1)))))
+     (let pairs (|> map (array:flat-one) (array:map array:second) (array:exclude (lambda x (= (array:length x) 1)))))
      (array:enumerated-for pairs (lambda pair i (do
-                (loop:for-range 0 (length pair) (lambda i 
-                    (loop:for-range i (length pair) (lambda j 
+                (loop:for-range 0 (array:length pair) (lambda i 
+                    (loop:for-range i (array:length pair) (lambda j 
                         (if (<> i j) (do
-                         (let y1 (array:first (get pair i)))
-                         (let y2 (array:first (get pair j)))
-                         (let x1 (array:second (get pair i)))
-                         (let x2 (array:second (get pair j)))
+                         (let y1 (array:first (array:get pair i)))
+                         (let y2 (array:first (array:get pair j)))
+                         (let x1 (array:second (array:get pair i)))
+                         (let x2 (array:second (array:get pair j)))
                          (update! y1 y2 x1 x2))))))))))
     (|> copy (array:flat-one) (array:exclude (lambda x (= x char:dot))) (length)))))
  

@@ -5,8 +5,8 @@
 (let test "mul(1,2)")
 
 (let match? (lambda source pattern index (do
-    (let size (length pattern))
-    (and (array:in-bounds? source (- index size)) (array:enumerated-every? pattern (lambda x i  (= (get source (+ (- index size) i)) x)))))))
+    (let size (array:length pattern))
+    (and (array:in-bounds? source (- index size)) (array:enumerated-every? pattern (lambda x i  (= (array:get source (+ (- index size) i)) x)))))))
 
 (let digit? (lambda digit (and (>= digit char:0) (<= digit char:9))))
 
@@ -46,7 +46,7 @@
             (*) (do
                 (if (digit? cursor) (do
                     (array:append! acc cursor)
-                    (if (> (length acc) 3) (array:empty! acc))
+                    (if (> (array:length acc) 3) (array:empty! acc))
                     (bool:false! valid-separator?)) (do
                     (if (bool:true? inside-parens?) (do
                         (array:pop! tree)
@@ -57,7 +57,7 @@
 (let part1 (lambda inp (|>
         inp
         (array:exclude array:empty?) 
-        (array:select (lambda x (= (length x) 2)))
+        (array:select (lambda x (= (array:length x) 2)))
         (array:map (lambda x (|> x
                         (array:map (lambda x (|> x (from:chars->digits) (from:digits->number))))
                         (math:product))))

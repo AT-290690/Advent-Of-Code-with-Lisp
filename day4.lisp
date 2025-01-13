@@ -15,12 +15,12 @@ MXMXAXMASX")
 (let part1 (lambda matrix (do
     (let coords (matrix:points matrix (lambda char (= char char:X))))
     (let pattern "XMAS")
-    (let size (length pattern))
+    (let size (array:length pattern))
     (let out (var:def 0))
     (let seek (lambda matrix y x Y X i (do
             (let dy (+ y (* Y i)))
             (let dx (+ x (* X i)))
-            (if (and (matrix:in-bounds? matrix dy dx) (and (<= i size) (= (get pattern i) (matrix:get matrix dy dx))))
+            (if (and (matrix:in-bounds? matrix dy dx) (and (<= i size) (= (array:get pattern i) (matrix:get matrix dy dx))))
                     (cond
                         (= i (- size 1)) (var:set! out (+ (var:get out) 1))
                         (*) (seek matrix y x Y X (+ i 1)))))))

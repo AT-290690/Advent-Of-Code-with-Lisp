@@ -46,9 +46,9 @@
     (let recursive:while (lambda (unless (or (queue:empty? q) (> (var:get solution) 0)) (do
             (let first (queue:peek q))
             (queue:dequeue! q)
-            (let steps (get first 0))
-            (let r (get first 1))
-            (let c (get first 2))
+            (let steps (array:get first 0))
+            (let r (array:get first 1))
+            (let c (array:get first 2))
             (matrix:adjacent matrix matrix:von-neumann-neighborhood r c 
                  (lambda current . nr nc (do
                             (if (and 
