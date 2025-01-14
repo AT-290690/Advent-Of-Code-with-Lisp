@@ -11,14 +11,13 @@
                     (let id (var:get (var:increment! file-id)))
                     (array:of ch (lambda . id)))
                     (array:of ch (lambda . -1))))) ())))
-    (let blanks ())
-    (array:enumerated-for disk (lambda x i (if (= x -1) (array:push! blanks i))))
+    (let blanks (array:enumerated-fold disk (lambda a x i (if (= x -1) (array:append! a i) a)) []))
     (let recursive:fragment (lambda ind (do
         (let i (array:get blanks ind))
         (if (= (array:last disk) -1) (do (array:pop! disk) (recursive:fragment ind))
-            (unless (<= (array:length disk) i) (do
-            (array:alter! disk i (array:pop! disk))
-            (recursive:fragment (+ ind 1))))))))
+            (if (not (<= (array:length disk) i)) (do
+                (array:set! disk i (array:pop! disk))
+                (recursive:fragment (+ ind 1))))))))
         (recursive:fragment 0)
         (|> disk (array:enumerated-fold (lambda a b i (+ a (* b i))) 0)))))
        
