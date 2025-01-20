@@ -22,8 +22,8 @@
   (let recursive:step (lambda start angle (do 
       (let current-dir (array:get dir (mod angle (array:length dir))))
       (let start-copy (array:shallow-copy start))
-      (array:alter! start-copy 0 (+ (array:get start-copy 0) (array:get current-dir 0)))
-      (array:alter! start-copy 1 (+ (array:get start-copy 1) (array:get current-dir 1)))
+      (array:set! start-copy 0 (+ (array:get start-copy 0) (array:get current-dir 0)))
+      (array:set! start-copy 1 (+ (array:get start-copy 1) (array:get current-dir 1)))
       (let [y x .] start-copy)
       (if (matrix:in-bounds? matrix y x) (do 
       (let current (matrix:get matrix y x))
@@ -44,8 +44,8 @@
   (let recursive:step (lambda matrix start angle corners (do 
       (let current-dir (array:get dir (mod angle (array:length dir))))
       (let start-copy (array:shallow-copy start))
-      (array:alter! start-copy 0 (+ (array:get start-copy 0) (array:get current-dir 0)))
-      (array:alter! start-copy 1 (+ (array:get start-copy 1) (array:get current-dir 1)))
+      (array:set! start-copy 0 (+ (array:get start-copy 0) (array:get current-dir 0)))
+      (array:set! start-copy 1 (+ (array:get start-copy 1) (array:get current-dir 1)))
       (let [y x .] start-copy)
       (if (matrix:in-bounds? matrix y x) (do 
       (let current (matrix:get matrix y x))

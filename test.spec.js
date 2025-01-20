@@ -1,4 +1,4 @@
-import { compile, parse } from "fez-lisp";
+import { compile, parse, type } from "fez-lisp";
 import { readFileSync, readdirSync } from "fs";
 const logError = (error) => console.log("\x1b[31m", `\n${error}\n`, "\x1b[0m");
 const logSuccess = (output) => console.log("\x1b[32m", output, "\x1b[0m");
@@ -39,9 +39,9 @@ if (
     .every((x) => {
       try {
         const a = map.get(x);
-        const b = new Function(
-          `return ${compile(parse(readFileSync(x, "utf-8")))}`
-        )();
+        const parsed = parse(readFileSync(x, "utf-8"));
+        // type(parsed);
+        const b = new Function(`return ${compile(parsed)}`)();
         const assertion = isEqual(a, b);
         if (!assertion) {
           logError(`${x} failed!`);
