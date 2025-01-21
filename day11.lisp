@@ -14,7 +14,7 @@
                 (cond
                   (= b 0) (array 1)
                   (math:even? n-digits) (array (math:remove-nth-digits b (/ n-digits 2)) (math:keep-nth-digits b (/ n-digits 2)))
-                  (*) (array (* b 2024)))))) ()) (- n 1)) (array:length stones))))
+                  (*) (array (* b 2024)))))) []) (- n 1)) (array:length stones))))
   (recursive:while input TIMES))))
 
 (let part2 (lambda input (do

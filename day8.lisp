@@ -15,7 +15,7 @@
 (let parse (lambda input (|> input (string:lines))))
 
 (let part1 (lambda matrix (do
-    (let coords ())
+    (let coords [])
     (matrix:enumerated-for matrix (lambda char y x (if (not (= char char:dot)) (array:push! coords (array char y x)))))
     (let copy (matrix:shallow-copy matrix))
     (let update! (lambda y1 y2 x1 x2 (do
@@ -48,7 +48,7 @@
     (|> copy (array:flat-one) (array:count char:hash)))))
 
 (let part2 (lambda matrix (do
-    (let coords ())
+    (let coords [])
     (matrix:enumerated-for matrix (lambda char y x (if (not (= char char:dot)) (array:push! coords (array char y x)))))
     (let copy (matrix:shallow-copy matrix))
     (let update! (lambda y1 y2 x1 x2 (do

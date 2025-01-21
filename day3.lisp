@@ -11,9 +11,9 @@
 (let digit? (lambda digit (and (>= digit char:0) (<= digit char:9))))
 
 (let parse (lambda source (do
-    (let tree ())
+    (let tree [])
     (let head (var:def tree))
-    (let acc ())
+    (let acc [])
     (let inside-parens? (bool:false))
     (let valid-separator? (bool:false))
     (let disabled? (bool:false))
@@ -27,7 +27,7 @@
                 (bool:true! inside-parens?)
                 (bool:false! valid-separator?)
                 (array:empty! acc)
-                (let temp ())
+                (let temp [])
                 (var:set! head temp)
                 (array:push! tree temp)) 
             (or (= cursor char:right-brace) (= cursor char:comma)) (do

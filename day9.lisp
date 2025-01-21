@@ -10,7 +10,7 @@
             (if (math:even? i) (do
                     (let id (var:get (var:increment! file-id)))
                     (array:of ch (lambda . id)))
-                    (array:of ch (lambda . -1))))) ())))
+                    (array:of ch (lambda . -1))))) [])))
     (let blanks (array:enumerated-fold disk (lambda a x i (if (= x -1) (array:append! a i) a)) []))
     (let recursive:fragment (lambda ind (do
         (let i (array:get blanks ind))
