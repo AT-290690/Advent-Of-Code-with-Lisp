@@ -18,13 +18,13 @@
     (let L (|> sides
                (array:first)
                (from:chars->digits)
-               (from:digits->number)))
+               (from:digits->integer)))
     (let R (|> sides
               (array:second)
               (string:words)
               (array:exclude array:empty?)
               (from:array->list)
-              (list:map from:string->number)))
+              (list:map from:string->integer)))
     {L R}))))))))
 
     

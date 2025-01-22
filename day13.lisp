@@ -29,7 +29,7 @@ Prize: X=18641, Y=10279")
                                                                             y
                                                                             (array:select char:digit?)
                                                                             (from:chars->digits)
-                                                                            (from:digits->number)))))))
+                                                                            (from:digits->integer)))))))
                             (array:partition 3))))
 
 (let part1 (lambda input

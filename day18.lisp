@@ -26,9 +26,9 @@
 2,0")
 
 
-(let parse (lambda input (|> input (string:lines) (array:map (lambda line (|> line (string:commas) (array:map from:string->number)))))))
+(let parse (lambda input (|> input (string:lines) (array:map (lambda line (|> line (string:commas) (array:map from:string->integer)))))))
 (let part1 (lambda input size (do
-    (let from:stats->key (lambda item (|> item (from:numbers->strings) (array:commas))))
+    (let from:stats->key (lambda item (|> item (from:integers->strings) (array:commas))))
     (let H (math:maximum (array:map input array:first)))
     (let W (math:maximum (array:map input array:second)))
     (let matrix (|> (math:zeroes (+ H 1)) (array:map (lambda . (array:map (math:zeroes (+ W 1)) (lambda . char:dot)) ))))

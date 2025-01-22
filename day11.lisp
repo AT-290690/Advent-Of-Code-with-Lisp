@@ -22,12 +22,12 @@
     (let memoized:count (lambda b n (cond 
                     (= n 0) 1
                     (= b 0) (memoized:count 1 (- n 1))
-                    (math:even? (array:length (from:number->digits b))) (do 
-                      (let str (from:number->digits b))
+                    (math:even? (array:length (from:integer->digits b))) (do 
+                      (let str (from:integer->digits b))
                       (let n-digits (array:length str))
                       (let half (/ n-digits 2))
-                      (let left (|> str (array:slice 0 half) (from:digits->number)))
-                      (let right (|> str (array:slice half (array:length str)) (from:digits->number)))
+                      (let left (|> str (array:slice 0 half) (from:digits->integer)))
+                      (let right (|> str (array:slice half (array:length str)) (from:digits->integer)))
                       (+ (memoized:count left (- n 1)) (memoized:count right (- n 1))))
                     (*) (memoized:count (* b 2024) (- n 1)))))
     (|> input (array:map (lambda x (memoized:count x TIMES))) (math:summation)))))

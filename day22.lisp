@@ -4,7 +4,7 @@
 100
 2024")
 
-(let parse (lambda input (|> input (string:lines) (array:map from:string->number))))
+(let parse (lambda input (|> input (string:lines) (array:map from:string->integer))))
 
 (let part1 (lambda input (do
 

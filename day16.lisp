@@ -19,7 +19,7 @@
 
 (let part1 (lambda matrix (do
 
-    (let from:stats->key (lambda item (|> item (from:numbers->strings) (array:commas))))
+    (let from:stats->key (lambda item (|> item (from:integers->strings) (array:commas))))
 
     (let start (array:first (matrix:points matrix (lambda cell (= cell char:S)))))
     (let end (array:first (matrix:points matrix (lambda cell (= cell char:E)))))
