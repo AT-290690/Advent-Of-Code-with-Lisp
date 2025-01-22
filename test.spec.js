@@ -40,7 +40,7 @@ if (
       try {
         const a = map.get(x);
         const parsed = parse(readFileSync(x, "utf-8"));
-        // type(parsed);
+        type(parsed);
         const b = new Function(`return ${compile(parsed)}`)();
         const assertion = isEqual(a, b);
         if (!assertion) {
