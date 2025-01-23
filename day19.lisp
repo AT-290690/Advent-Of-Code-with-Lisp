@@ -22,7 +22,7 @@ bbrgwb")
   (let memoized:dp (lambda str (loop:some-range? 1 (array:length str) (lambda i (do
               (let a (array:slice str 0 i))
               (let b (array:slice str i (array:length str)))
-              (or (and (set:has? patterns a) (set:has? patterns b)) (and (memoized:dp a) (memoized:dp b))))))))
+              (or (and (set:has? patterns a) (set:has? patterns b)) (and (true? (memoized:dp a)) (true? (memoized:dp b)))))))))
   (array:count-of towels memoized:dp))))
 
 (let part2 (lambda input (do

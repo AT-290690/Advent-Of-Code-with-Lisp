@@ -37,24 +37,24 @@
             (list:map list:head)
             (math:list-summation))))
 
- (let part1 (lambda args out (do
+ (let part1? (lambda args out (do
           (if (list:nil? (list:tail args)) (= out (list:head args))
               (or
                 (and (= (mod out (list:head args)) 0)
-                     (part1 (list:tail args) (/ out (list:head args))))
-                (and (> out (list:head args)) (part1 (list:tail args) (- out (list:head args)))))))))
+                     (part1? (list:tail args) (/ out (list:head args))))
+                (and (> out (list:head args)) (part1? (list:tail args) (- out (list:head args)))))))))
                 
-(let part2 (lambda args out (do
+(let part2? (lambda args out (do
           (if (list:nil? (list:tail args)) (= out (list:head args))
               (or
                 (and (= (mod out (list:head args)) 0) 
-                     (part2 (list:tail args) (/ out (list:head args))))
+                     (part2? (list:tail args) (/ out (list:head args))))
                 (and (> out (list:head args)) 
-                     (part2 (list:tail args) (- out (list:head args))))
+                     (part2? (list:tail args) (- out (list:head args))))
                 (and (> (math:number-of-digits out) (math:number-of-digits (list:head args)))
                      (= (math:keep-nth-digits out (math:number-of-digits (list:head args))) (list:head args))
-                     (part2 (list:tail args) (math:remove-nth-digits out (math:number-of-digits (list:head args))))))))))
+                     (part2? (list:tail args) (math:remove-nth-digits out (math:number-of-digits (list:head args))))))))))
 
 (let PARSED (parse INPUT))
 
-[(sum PARSED part1) (sum PARSED part2)]
+[(sum PARSED part1?) (sum PARSED part2?)]

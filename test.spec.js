@@ -48,7 +48,7 @@ if (
         }
         return assertion;
       } catch (error) {
-        logError(error.message);
+        logError(`${x}:\n${error.message}`);
       }
     })
 )
