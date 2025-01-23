@@ -6,7 +6,7 @@
 8 6 4 4 1
 1 3 6 7 9")
 
-(let parse (lambda input (|> input (string:lines) (array:map (lambda l (|> l (string:words) (from:strings->numbers)))))))
+(let parse (lambda input (|> input (string:lines) (array:map (lambda l (|> l (string:words) (from:strings->integers)))))))
 
 (let part1 (lambda input (|> input (array:select (lambda line (do
   (let slice (|> line (array:zip (array:slice line 1 (array:length line))) (array:map (lambda x (tuple:subtract x)))))

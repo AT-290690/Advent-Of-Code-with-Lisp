@@ -13,7 +13,7 @@
                                                       word
                                                       (string:words)
                                                       (array:select array:not-empty?)
-                                                      (from:strings->numbers)))))))
+                                                      (from:strings->integers)))))))
 
 (let part1 (lambda input (|>
                           input

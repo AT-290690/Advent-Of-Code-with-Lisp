@@ -16,7 +16,7 @@ p=9,5 v=-3,-3")
     (|> input
         (string:lines)
         (array:map (lambda x
-            (|> x (string:words) (array:map (lambda x (|> x (array:drop 2)  (string:commas) (from:strings->numbers))))))))))
+            (|> x (string:words) (array:map (lambda x (|> x (array:drop 2)  (string:commas) (from:strings->integers))))))))))
 
 (let part1 (lambda input (do
     (let WIDTH 11)

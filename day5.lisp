@@ -47,7 +47,7 @@
 
 (let sum-mid (lambda arr (|> arr
     (array:map (lambda m (array:get m (math:floor (* (array:length m) 0.5)))))
-    (from:strings->numbers)
+    (from:strings->integers)
     (math:summation))))
 
 (let part1 (lambda input (do

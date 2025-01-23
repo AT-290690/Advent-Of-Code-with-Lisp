@@ -1,6 +1,6 @@
 (let INPUT "125 17")
 
-(let parse (lambda input (|> input (string:words) (from:strings->numbers))))
+(let parse (lambda input (|> input (string:words) (from:strings->integers))))
 
 ; If the stone is engraved with the number 0, it is replaced by a stone engraved with the number 1.
 ; If the stone is engraved with a number that has an even number of digits, it is replaced by two stones. The left half of the digits are engraved on the new left stone, and the right half of the digits are engraved on the new right stone. (The new numbers don't keep extra leading zeroes: 1000 would become stones 10 and 0.)
