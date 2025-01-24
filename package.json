@@ -5,11 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "day": "node index.js"
+    "aoc": "node index.js"
   },
   "author": "Anthony Tonev & others",
   "license": "MIT",
   "dependencies": {
-    "fez-lisp": "^1.5.42"
+    "fez-lisp": "^1.5.45"
   }
 }

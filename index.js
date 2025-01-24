@@ -1,14 +1,15 @@
 import { compile, evaluate, parse, type } from "fez-lisp";
 import { readFileSync, access } from "fs";
-const day = process.argv[2];
-const path = `./day${day}.lisp`;
+const year = process.argv[2];
+const day = process.argv[3];
+const path = `./${year}/day${day}.lisp`;
 access(path, (err) => {
   if (err) {
     console.log(`\x1b[31mSolution for day ${day} does not exist\x1b[33m\n`);
   } else {
     try {
       const parsed = parse(readFileSync(path, "utf-8"));
-      // type(parsed);
+      type(parsed);
       const solution = new Function(`return ${compile(parsed)}`)();
       // const solution = evaluate(parse(readFileSync(path, "utf-8")));
       if (Array.isArray(solution))

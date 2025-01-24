@@ -6,7 +6,7 @@ https://adventofcode.com/2024
 # install lisp
 npm i
 # run solution for given day
-npm run day 1
+npm run aoc 2024 1
 ```
 
 Programming language https://github.com/AT-290690/fez
