@@ -52,7 +52,7 @@
             (array:enumerated-for x (lambda y i (do 
                 (array:set! h i (math:max (array:get h i) y)))))))) h)))
 
-    (let fit? (lambda pairs (do 
+    (let fit-sum (lambda pairs (do 
         (|> pairs (array:map (lambda [lock key .] 
                   (|> (array:zip lock key) 
                     (array:map (lambda x (- M (tuple:add x)))) 
@@ -72,7 +72,7 @@
     (let locks (|> heights (array:select (lambda x (= (array:first x) A))) (array:map array:second)))
     (let keys (|> heights (array:select (lambda x (= (array:first x) B))) (array:map array:second)))
 
-    (|> (math:cartesian-product locks keys) (fit?)))))
+    (|> (math:cartesian-product locks keys) (fit-sum)))))
 
 (let PARSED (parse INPUT))
 
