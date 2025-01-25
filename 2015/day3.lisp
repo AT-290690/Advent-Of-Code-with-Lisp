@@ -22,7 +22,7 @@
 (let part2 (lambda x (do
   (let a (array:enumerated-fold x (lambda a b i (if (math:even? i) (array:merge a (array b)) a)) []))
   (let b (array:enumerated-fold x (lambda a b i (if (math:odd? i) (array:merge a (array b)) a)) []))
-  (let map (array [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] []))
+  (let map [[] [] [] [] [] [] [] [] [] [] [] [] [] [] [] []])
   (set:add! map "+0,+0")
   (walk map a)
   (walk map b)
