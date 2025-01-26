@@ -5,11 +5,12 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "aoc": "node index.js"
+    "aoc": "node index.js",
+    "test": "node 2015/test.spec.js && node 2019/test.spec.js && node 2020/test.spec.js && node 2023/test.spec.js && node 2024/test.spec.js"
   },
   "author": "Anthony Tonev & others",
   "license": "MIT",
   "dependencies": {
-    "fez-lisp": "^1.5.63"
+    "fez-lisp": "^1.5.66"
   }
 }
