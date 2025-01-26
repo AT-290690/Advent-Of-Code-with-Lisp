@@ -11,6 +11,6 @@
   "author": "Anthony Tonev & others",
   "license": "MIT",
   "dependencies": {
-    "fez-lisp": "^1.5.68"
+    "fez-lisp": "^1.5.71"
   }
 }
