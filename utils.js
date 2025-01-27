@@ -1,4 +1,4 @@
-import { compile, parse, type } from "fez-lisp";
+import { compile, enhance, parse, type } from "fez-lisp";
 import { readFileSync, readdirSync } from "fs";
 export const logError = (error) =>
   console.log("\x1b[31m", `\n${error}\n`, "\x1b[0m");
@@ -24,7 +24,7 @@ export const test = (year, arr) => {
           const a = map.get(x);
           const parsed = parse(readFileSync(`${path}${x}`, "utf-8"));
           type(parsed);
-          const b = new Function(`return ${compile(parsed)}`)();
+          const b = new Function(`return ${compile(enhance(parsed))}`)();
           const assertion = isEqual(a, b);
           if (!assertion) {
             logError(`${path}${x} failed!`);

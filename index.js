@@ -1,4 +1,4 @@
-import { compile, evaluate, parse, type } from "fez-lisp";
+import { compile, enhance, evaluate, parse, type } from "fez-lisp";
 import { readFileSync, access } from "fs";
 const year = process.argv[2];
 const day = process.argv[3];
@@ -10,7 +10,7 @@ access(path, (err) => {
     try {
       const parsed = parse(readFileSync(path, "utf-8"));
       type(parsed);
-      const solution = new Function(`return ${compile(parsed)}`)();
+      const solution = new Function(`return ${compile(enhance(parsed))}`)();
       // const solution = evaluate(parse(readFileSync(path, "utf-8")));
       if (Array.isArray(solution))
         console.log(

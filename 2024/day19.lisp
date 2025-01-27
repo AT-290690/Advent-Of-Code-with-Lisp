@@ -19,11 +19,11 @@ bbrgwb")
 (let part1 (lambda input (do
   (let patterns (array:fold (array:first input) (lambda a b (set:add! a b)) (new:set8)))
   (let towels (array:second input))
-  (let memoized:dp (lambda str (loop:some-range? 1 (array:length str) (lambda i (do
+  (let memoized:dp? (lambda str (loop:some-range? 1 (array:length str) (lambda i (do
               (let a (array:slice str 0 i))
               (let b (array:slice str i (array:length str)))
-              (or (and (set:has? patterns a) (set:has? patterns b)) (and (true? (memoized:dp a)) (true? (memoized:dp b)))))))))
-  (array:count-of towels memoized:dp))))
+              (or (and (set:has? patterns a) (set:has? patterns b)) (and (true? (memoized:dp? a)) (true? (memoized:dp? b)))))))))
+  (array:count-of towels memoized:dp?))))
 
 (let part2 (lambda input (do
   (let desings (array:first input))
